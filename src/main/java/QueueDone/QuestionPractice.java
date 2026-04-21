@@ -52,13 +52,31 @@ public class QuestionPractice {
     public static void interleaveHalves(Queue<Integer> q ){
         Queue<Integer> firstHalve= new LinkedList<>();
 
-        int size = q.size();
+        int size = q.size(); // for calculating the size
         for (int i = 0; i < size /2 ; i++) {
-            firstHalve.add(q.remove());
+            firstHalve.add(q.remove()); //basically here remove the elements from q and add it to the first half
         }
-        while(!firstHalve.isEmpty()){
-            q.add(firstHalve.remove());
-            q.add(q.remove());
+        while(!firstHalve.isEmpty()){ // check till empty
+            q.add(firstHalve.remove()); // remove first half and add it to q
+            q.add(q.remove()); //then remove form front and add it to rear
+        }
+    }
+
+    public static void queueReverse(Queue<Integer> q2){
+//        My silly approach this create infinit Loop:-
+//        while(!q2.isEmpty()){
+//            q2.add(q2.remove());
+//        }
+//        we need stack which already gives reverse INT
+        Stack<Integer> s = new Stack<>();
+
+        // Step 1: Queue -> Stack (Order is reversed)
+        while(!s.isEmpty()){
+            s.push(q2.remove());
+        }
+        // Step 2: Stack -> Queue (Now in reverse order)
+        while (!s.isEmpty()){
+            q2.add(s.pop());
         }
     }
 }
