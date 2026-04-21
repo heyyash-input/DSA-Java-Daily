@@ -49,6 +49,8 @@ public class QuestionPractice {
         System.out.println();
     }
 
+//-----------------------------------------------------------------------------------------------------------
+
     public static void interleaveHalves(Queue<Integer> q ){
         Queue<Integer> firstHalve= new LinkedList<>();
 
@@ -61,6 +63,8 @@ public class QuestionPractice {
             q.add(q.remove()); //then remove form front and add it to rear
         }
     }
+
+//---------------------------------------------------------------------------------------------------------
 
     public static void queueReverse(Queue<Integer> q2){
 //        My silly approach this create infinit Loop:-
@@ -79,4 +83,63 @@ public class QuestionPractice {
             q2.add(s.pop());
         }
     }
+
+// --------------------------------------------------------------------------------------------------------------
+
+//    Creating Stack using deque :-
+    public static class Stack01{
+       static Deque <Integer> deque = new LinkedList<>();
+        public static void push ( int data){
+             deque.addLast(data);
+        }
+        public static int peek ( ){
+             return deque.getLast();
+        }
+        public static int pop (){
+            return deque.removeLast();
+        }
+
+    public static void main(String[] args) {
+       Stack01  s = new Stack01() ;
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        System.out.println("peek: " + s.peek());
+        System.out.println(s.pop()); // this pops 3
+
+        }
+    }
+
+//    -----------------------------------------------------------------------------------------------------------------
+
+//    Implementing Queue using Deque :-
+    public static class Queue01{
+       static Deque<Integer> deque = new LinkedList<>();
+
+        public static void add(int data){
+            deque.addLast(data);
+        }
+
+        public static int remove(){
+            return deque.removeFirst();
+        }
+
+        public static int peek(){
+            return deque.getFirst();
+        }
+
+        public static void main(String[] args) {
+            Queue01 q = new Queue01();
+            q.add(1);
+            q.add(2);
+            q.add(3);
+            System.out.println("peek: "+q.peek());
+            System.out.println(q.remove());
+            System.out.println(q.remove());
+            System.out.println(q.remove());
+        }
+    }
+
+//  --------------------------------------------------------------------------------------------------------------
+
 }
