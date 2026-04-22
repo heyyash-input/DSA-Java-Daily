@@ -18,7 +18,8 @@ public class SlidingWindow1_n {
 //        System.out.println(SubarrayVariableSmallest(arr,k));
         System.out.println(MinimumWindowSubstring(s,t));
     }
-
+//----------------------------------------------------------------------------------------------------------------
+//    Practice these by hard always asked in interview
     public static int TemplateSlidingWindow(int [] arr,int k){
         int i = 0 ;
         int windowsum = 0;
@@ -35,6 +36,8 @@ public class SlidingWindow1_n {
         }
         return maxSum;
     }
+
+//---------------------------------------------------------------------------------------------------------------
 
     public static int MaxVowelsWindow(String s , int k){
         int i = 0 ;
@@ -57,6 +60,8 @@ public class SlidingWindow1_n {
         return maxsum ;
     }
 
+//---------------------------------------------------------------------------------------------------------------
+
     public static int MaximunSub(int [] arr , int k){
         int i = 0 ;
         int window = 0 ;
@@ -72,6 +77,8 @@ public class SlidingWindow1_n {
         return maxSum ;
     }
 
+//--------------------------------------------------------------------------------------------------------------
+
     public static  int MinimumSub(int [] arr , int k){
         int minSum = Integer.MAX_VALUE ;
         int i = 0 ;
@@ -86,6 +93,8 @@ public class SlidingWindow1_n {
         }
         return minSum;
     }
+
+//--------------------------------------------------------------------------------------------------------------
 
     public static int sumGreater10(int [] arr , int k){
         int i = 0 ;
@@ -106,8 +115,11 @@ public class SlidingWindow1_n {
         }
         return sum ;
     }
-    //Variable subarray
 
+//---------------------------------------------------------------------------------------------------------------
+//    VVVIMP
+// Variable subarray
+//    This was also asked in interview personally recommend you
     public static int SubarrayVariableSmallest(int[] arr,int k ){
         int i = 0 ;
         int minLength = Integer.MAX_VALUE ;
@@ -125,6 +137,8 @@ public class SlidingWindow1_n {
         }
         return minLength;
     }
+
+//-------------------------------------------------------------------------------------------------------------
 
     public static int LargestWindow(int [] arr , int k){
         if (arr == null || arr.length == 0) return 0;
@@ -144,7 +158,9 @@ public class SlidingWindow1_n {
         return maxlength ;
     }
 
+//---------------------------------------------------------------------------------------------------------------
     // Count Ocurrance of Anagrams
+
     public static int CountOccurance(String pat , String txt){
         int k = pat.length();
         int n = txt.length();
@@ -181,6 +197,8 @@ public class SlidingWindow1_n {
         }
         return result;
     }
+
+//-----------------------------------------------------------------------------------------------------------------
 
     public static String  MinimumWindowSubstring(String s , String t){
       int countS [] =  new int [128];
@@ -220,6 +238,9 @@ public class SlidingWindow1_n {
       }
       return minlength == Integer.MAX_VALUE? "":s.substring(start,start+minlength) ;
     }
+
+//----------------------------------------------------------------------------------------------------------------
+
     public static int LongestSubstringWithoutRepeatingCharacter(String s){
         int maxLength = Integer.MIN_VALUE;
         int i = 0 ;
@@ -236,9 +257,13 @@ public class SlidingWindow1_n {
         }
         return maxLength;
     }
+
+//---------------------------------------------------------------------------------------------------------------
+
 //    Majority elements Questions:-
 //    n/3:-
 //    for any n/k majority add more k+1 cand and counts , Boyr Moore Voting thoerm:-
+
     public static List<Integer> majorityElement(int [] nums){
         List<Integer> result = new ArrayList<>() ;
         int cand1 = Integer.MIN_VALUE , c1 = 0 ;
@@ -274,6 +299,9 @@ public class SlidingWindow1_n {
         if (cand2>n/2) result.add(cand2);
         return result ;
     }
+
+//--------------------------------------------------------------------------------------------------------------
+
 //    Famous Sum questions:-
     public static List<List<Integer>> threeSum(int [] nums){
         List<List<Integer>> result = new ArrayList<>();
@@ -297,3 +325,5 @@ public class SlidingWindow1_n {
         return result;
     }
 }
+
+//--------------------------------------------------------------------------------------------------------------
