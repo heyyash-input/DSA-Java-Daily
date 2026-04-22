@@ -182,6 +182,9 @@ public class Stack1_n {
 //        System.out.println();
     }
 
+//    ------------------------------------------------------------------------------------------------------
+//     VVIMP asked in interview for Bajaj Finserv
+
     private static void maxHistogram(int[] arr) {
       int maxArea = 0 ;
       int nsr[] = new int[arr.length] ;
@@ -228,6 +231,8 @@ public class Stack1_n {
         return ;
     }
 
+//----------------------------------------------------------------------------------------------------------------
+
     public static boolean isDuplicate(String str2){
       Stack<Character> s = new Stack<>() ;
 
@@ -251,6 +256,8 @@ public class Stack1_n {
         }
         return false;
     }
+
+//    -----------------------------------------------------------------------------------------------------------
 
     public static boolean isValid(String str) {
         Stack<Character> s = new Stack<>();
@@ -279,8 +286,7 @@ public class Stack1_n {
             return false;
         }
     }
-
-//    public static void NGL
+//----------------------------------------------------------------------------------------------------------------
 
     private static void stockSpan(int[] stock, int[] span) {
       Stack<Integer> s = new Stack<>() ;

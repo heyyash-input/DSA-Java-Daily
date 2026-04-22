@@ -33,6 +33,7 @@ public class Strings1_n {
 //        System.out.println(ValidParenthesis(s));
         System.out.println(Kdistinct(s,k));
     }
+//    VVVimp asked
     public static String ReverseString(String s ){
 
         char [] letters = s.toCharArray();
@@ -57,6 +58,9 @@ public class Strings1_n {
 // StringBuilder: A special "Work-in-Progress" string tool that is much faster if you are
 // adding lots of letters together in a loop.
 
+// --------------------------------------------------------------------------------------------------------------
+//      VVIMP below CheckPalindrome was asked for my interview
+//     I personally recommend you to Practice these Pattern
     public static boolean CheckPalindrom(String s ){
         int start = 0 ;
         int end =  s.length()-1 ;
