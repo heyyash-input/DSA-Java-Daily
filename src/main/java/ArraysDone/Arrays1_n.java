@@ -28,6 +28,8 @@ public class Arrays1_n {
 //                nums[start] = nums[end];
 //                nums[end] = temp;
 //    }
+//--------------------------------------------------------------------------------------------------------------
+
     public static int FindLarget(int[] arr){
         //Return -1 if array is Empty
         if(arr == null || arr.length == 0 ) return -1;
@@ -45,6 +47,8 @@ public class Arrays1_n {
         return maxVal ;
     }
 
+//--------------------------------------------------------------------------------------------------------
+
     public static int FindSecondLargest(int[]arr){
         if(arr == null || arr.length == 0) return 0 ;
         int gold = Integer.MIN_VALUE;
@@ -59,6 +63,8 @@ public class Arrays1_n {
         }
         return (silver ==Integer.MIN_VALUE) ? -1 : silver ;
     }
+
+//-------------------------------------------------------------------------------------------------------------
 
     public static int ExceptionsSecondLargest(int[]arr){
         if (arr == null || arr.length==0) {
@@ -79,7 +85,7 @@ public class Arrays1_n {
         }
         return second ;
     }
-
+//--------------------------------------------------------------------------------------------------------------
     public static int MoveZeroToEnd(int[] arr){
         int  write = 0 ;
         for (int i = 0; i < arr.length; i++) {
@@ -95,6 +101,8 @@ public class Arrays1_n {
         }
         return CountZero;
     }
+//    -----------------------------------------------------------------------------------------------------------
+
     public static void Rotate(int[] arr,int k){
         int n=arr.length;
          k = k%n ;
@@ -112,6 +120,7 @@ public class Arrays1_n {
             end--;
         }
     }
+//-----------------------------------------------------------------------------------------------------------
 
     public static int maxConsecutiveOnes(int [] arr ){
         int count = 0 ;
@@ -126,6 +135,8 @@ public class Arrays1_n {
         }
         return maxLength;
     }
+
+//    -----------------------------------------------------------------------------------------------------
 // For negative and positve integers we can't use sliding window we need prefix + hashing
     public static int LogenstSubarraySumK(int []arr , int k){
         HashMap<Integer,Integer> map = new HashMap<>();
