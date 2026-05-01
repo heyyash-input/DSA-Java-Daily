@@ -117,10 +117,53 @@ public class GettingStarted {
             minAbsDiff += Math.abs(A[i] - B[i]);
         }
         System.out.println("Minimum Absolute Diff:- " + minAbsDiff);
-    }
+
+//--------------------------------------------------------------------------------------------------------------
+
+        int pairs [][] ={{5,24},{39,60},{5,28},{27,40},{50,90}};
+        Arrays.sort(pairs,Comparator.comparingDouble(o -> o [1]));
+
+        int chainLength = 1 ;
+        int chainEnd = pairs[0][1]; //last selected pairs (Chain end)
+        for (int i = 1; i < pairs.length; i++) {
+//            int pairStart = pairs[i][0];
+            if(pairs[i][0] > chainEnd){
+                chainLength++ ;
+                chainEnd = pairs[i][1] ;
+            }
+        }
+        System.out.println("Total number of Pairs are: " + chainLength);
+
+//--------------------------------------------------------------------------------------------------------------
+
+        /*
+         * GREEDY APPROACH: INDIAN COIN CHANGE
+         * Target Amount: 590
+         * Denominations: {1, 2, 5, 10, 20, 50, 100, 500, 2000}
+         *
+         * TRACE TABLE:
+         * +-------+--------------+----------------+--------------+-------------+
+         * | Step  | Note Used    | Amount Before  | Amount After | Total Count |
+         * +-------+--------------+----------------+--------------+-------------+
+         * | 1     | 500          | 590            | 90           | 1           |
+         * | 2     | 50           | 90             | 40           | 2           |
+         * | 3     | 20           | 40             | 20           | 3           |
+         * | 4     | 20           | 20             | 0            | 4           |
+         * +-------+--------------+----------------+--------------+-------------+
+         * FINAL RESULT: 4 Notes (1x500, 1x50, 2x20)
+         */
+        int coins[] = {1, 2, 5, 10, 20, 50, 100, 500, 2000};
+        int amount = 590;
+        int count = 0 ;
+        for (int i = coins.length - 1; i >= 0; i--) {
+            while (coins[i] <= amount) {
+                count++;
+                amount -= coins[i];
+            }
+        }
+        System.out.println("Indian coins to be added are: "+ count);
 
 //-------------------------------------------------------------------------------------------------------------
 
-
-
+    }
 }
