@@ -21,7 +21,7 @@ public class Fundamentals {
         //Strings are Immutable
 
         // Taking input and output
-//        Scanner sc =  new Scanner(System.in);
+////       Scanner sc =  new Scanner(System.in);
 //        String name , college ;
 //        college= sc.next(); // takes only words
 //        name = sc.nextLine(); // takes whole word
@@ -120,11 +120,13 @@ public class Fundamentals {
                 x++;
             }
         }
-
         int X2 = x*x;
         int Y2 = y*y;
         return (float)Math.sqrt(X2 + Y2);
     }
 
+//---------------------------------------------------------------------------------------------------------------
+
+    
 
 }

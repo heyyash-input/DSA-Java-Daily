@@ -39,6 +39,8 @@ public class LinkedList1_n {
     public static Node tail ;
     public static int size; /// by default java size =0 ;
 
+//--------------------------------------------------------------------------------------------------------------
+
 //  Add to the first to the  LL
     public void addFirst(int data){
 //        1) Create new node:-
@@ -54,6 +56,8 @@ public class LinkedList1_n {
         head = newNode ;
     }
 
+//---------------------------------------------------------------------------------------------------------------
+
 //    Add to the last of LL
     public void addLast(int data){
 //        1) create newNode
@@ -68,6 +72,8 @@ public class LinkedList1_n {
         tail =  newNode ;
     }
 
+//-----------------------------------------------------------------------------------------------------------------
+
 // Print LL
     public void print(){
         if (head == null){
@@ -80,6 +86,9 @@ public class LinkedList1_n {
         }
         System.out.println("null"); // next line
     }
+
+//------------------------------------------------------------------------------------------------------------------
+
     public Node findMid(Node head){
         Node slow = head ;
         Node fast = head ;
@@ -90,6 +99,8 @@ public class LinkedList1_n {
         //// we got the middle it is in middle ////
         return slow ;
     }
+
+//-------------------------------------------------------------------------------------------------------------
 
     public boolean isPlaindrome(){
         if (head == null || head.next == null){
@@ -119,6 +130,8 @@ public class LinkedList1_n {
         }
         return true ;
     }
+
+//-------------------------------------------------------------------------------------------------------------------
 
 //    Add middle of LL
     public void add(int idx , int data){
@@ -211,6 +224,8 @@ public class LinkedList1_n {
         return helper(head , key ) ;
     }
 
+//-------------------------------------------------------------------------------------------------------------
+
     public static void reverseLinkedList(){
         Node prev = null ;
         Node curr = tail = head ;
@@ -223,6 +238,8 @@ public class LinkedList1_n {
         }
         head = prev ;
     }
+
+//--------------------------------------------------------------------------------------------------------------------
 
 ///  Delete Node from end Nth position :-
     public static void deleteNthFromEndN(int n){
@@ -249,6 +266,8 @@ public class LinkedList1_n {
         return;
     }
 
+//------------------------------------------------------------------------------------------------------------
+
 ///    Detecting cycle in LL:-
     public static boolean checkCycle(){
         Node slow = head ;
@@ -262,6 +281,8 @@ public class LinkedList1_n {
         }
         return false ;
     }
+
+//------------------------------------------------------------------------------------------------------------
 
 ///    Removing cycle from LL:-
     public static void removeCycle(){
@@ -293,7 +314,9 @@ public class LinkedList1_n {
         prev.next = null ; // removed the last starting point of the code
     }
 
-////  MergeSort Linked List VVIMPP Pattern :-
+//-------------------------------------------------------------------------------------------------------------
+
+////  MergeSort Linked List VVIMPP Pattern :- asked in interview VVVVIMPPPP
     public Node getMid(Node head){
         Node slow = head ;
         Node fast = head.next;
@@ -348,6 +371,8 @@ public Node merge(Node head1 , Node head2) {
 //        TC- O(N log N )
     }
 
+//---------------------------------------------------------------------------------------------------------------
+
 /// Zig-Zag merge:-
 public void zigZag(){
 //    Find mid :-
@@ -388,6 +413,7 @@ public void zigZag(){
     }
 }
 
+//-------------------------------------------------------------------------------------------------------------
 
 }
 
