@@ -68,6 +68,23 @@ public class Fundamentals {
         }else {
             System.out.println(" Not equals");
         }
+
+        String fruits []  = {"apple" , "mango" , "banana"};
+        String largest = fruits[0];
+        for (int i = 0; i < fruits.length; i++) {
+            if(largest.compareTo(fruits[i]) < 0 ){
+                largest = fruits[i];
+            }
+        }
+        System.out.println(largest);
+
+//        Upper Case question:-
+        String str03 = "hi, i am yash";
+        System.out.println(upperCase(str03));
+
+        //String commprssion question:-
+        String str04 = "aaabbcccdd";
+        System.out.println(compression(str04));
     }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -127,6 +144,74 @@ public class Fundamentals {
 
 //---------------------------------------------------------------------------------------------------------------
 
-    
+    /// Asked in interview VVVIMPPP:-
+    public static String upperCase(String str03 ){
+        StringBuilder sb  = new StringBuilder();
+        char ch = Character.toUpperCase(str03.charAt(0));
+        sb.append(ch);
+        for (int i = 1; i < str03.length(); i++) {
+            if(str03.charAt(i) == ' ' && i < str03.length()-1){
+                sb.append(str03.charAt(i));
+                i++;
+                sb.append(Character.toUpperCase(str03.charAt(i)));
+            }else{
+                sb.append(str03.charAt(i));
+            }
+        }
+        return sb.toString();
+    }
 
+//----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * AMAZON INTERVIEW PATTERN: String Compression (Run-Length Encoding)
+     * Time Complexity: O(n) - We traverse the string once.
+     * Space Complexity: O(n) - To store the compressed result.
+     */
+    public static String compression(String str04) {
+        // 1. Use StringBuilder for O(n) performance.
+        // Regular String concatenation (+=) inside a loop creates many temporary objects.
+        StringBuilder sb = new StringBuilder("");
+
+        for (int i = 0; i < str04.length(); i++) {
+            Integer count = 1;
+
+            // 2. The "Look-Ahead" Logic:
+            // Compare current char with the next one.
+            // We stop at length-1 to avoid IndexOutOfBoundsException.
+            while (i < str04.length() - 1 && str04.charAt(i) == str04.charAt(i + 1)) {
+                count++;
+                i++; // Increment 'i' to skip the characters we've already counted
+            }
+            // 3. Append the character being compressed
+            sb.append(str04.charAt(i));
+            // 4. Optimization: Only add the count if it's greater than 1.
+            // Example: "abcd" stays "abcd", not "a1b1c1d1".
+            if (count > 1) {
+                sb.append(count.toString());
+            }
+        }
+        return sb.toString();
+    }
+
+    //another version without using string builder
+//    //Interview special - AMAZAON IMPP Pattern
+//    public static String compression(String str04){
+//        String strNew = "";
+//
+//        for (int i = 0; i < str04.length() ; i++) {
+//            Integer count = 1 ;
+//            while( i < str04.length()-1 && str04.charAt(i) == str04.charAt(i+1)){
+//                count++;
+//                i++;
+//            }
+//            strNew += str04.charAt(i);
+//            if(count > 1 ){
+//                strNew += count.toString();
+//            }
+//        }
+//        return strNew ;
+//    }
+
+//---------------------------------------------------------------------------------------------------------------
 }
