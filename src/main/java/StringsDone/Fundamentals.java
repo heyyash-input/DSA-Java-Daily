@@ -85,6 +85,10 @@ public class Fundamentals {
         //String commprssion question:-
         String str04 = "aaabbcccdd";
         System.out.println(compression(str04));
+
+        //Occurance of lower case:-
+        String lc = "Yash";
+        System.out.println(occuranceLowerCase(lc));
     }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -214,4 +218,20 @@ public class Fundamentals {
 //    }
 
 //---------------------------------------------------------------------------------------------------------------
+
+    //Count how many times lowercase vowels occurred in a String entered by the user:-
+    public static int occuranceLowerCase(String lc){
+        int count = 0 ;
+        for (int i = 0; i < lc.length() ; i++) {
+            char ch = lc.charAt(i);
+            if ( i < lc.length()-1 && ch == 'a' || ch == 'e' || ch == 'o' || ch =='i' || ch =='u'){
+                count++;
+            }
+        }
+        return count;
+    }
+
+//---------------------------------------------------------------------------------------------------------------
+
+
 }
