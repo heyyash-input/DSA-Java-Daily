@@ -2,13 +2,19 @@ package RecursionDone;
 
 public class Recursion1_n {
     public static void main(String[] args) {
-        int n = 10;
+//        int n = 10;
 //        descendingNum(n);
 //        System.out.println(fact(n));
 //        ascendNum(n);
 //        System.out.println(firstNatural(5));
-        System.out.println(fibo(n));
-
+//        System.out.println(fibo(n));
+//        int arr [] = {1 , 2, 3 ,4  };
+//        System.out.println(isSorted(arr,0));
+        int arr [] = {8,3,6,9,5,10,2 ,5 ,3 ,9};
+//        System.out.println(firstOcc(arr,5,0));
+//        System.out.println(lastOcc(arr,5,0));
+        System.out.println(powExp(2,10));
+        System.out.println(optPow(2,5));
     }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -115,6 +121,86 @@ public class Recursion1_n {
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // Check is array is sorted or not:-
+    public static boolean isSorted(int[] arr , int i){
+        if ( i == arr.length-1){
+            return true ;
+        }
+        if(arr[i] > arr [i +1]){
+            return false;
+        }
+        return isSorted(arr,i+1);
+    }
 
+//--------------------------------------------------------------------------------------------------------------
+    // return first occurance
+    public static int firstOcc (int arr [] , int key ,int i ){
 
+        if ( i == arr.length){
+            return -1;// means we didn't get andy value as we reached at the last
+        }
+        if (arr[i] == key ){
+            return i;
+        }
+        return firstOcc(arr,key,i+1); //if not then i++
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+    /** VVIMPP (BackTrack check)
+     * FIND LAST OCCURRENCE (RECURSIVE)
+     * --------------------------------
+     * This method uses 'Head Recursion' logic to look forward before checking itself.
+     *
+     * Logic:
+     * 1. Go to the end of the array first (Build the Stack).
+     * 2. On the way back (Unwinding), the first time we find the key,
+     *    that is officially the LAST occurrence in the original array.
+     *
+     * Time Complexity: O(n) - Every element is visited once.
+     * Space Complexity: O(n) - Recursive stack depth equals array length.
+     */
+    public static int lastOcc(int arr [] , int key , int i){
+        if( i == arr.length){
+            return -1 ;
+        }
+        //check forward:-
+        int isFound = lastOcc(arr, key, i + 1); // 1. Wait for signal from ahead
+
+        if (isFound != -1) {        // 2. If signal is NOT -1, someone ahead ALREADY found it
+            return isFound;         // 3. Just pass their answer back.
+        }
+
+        if (arr[i] == key) {        // 4. If signal IS -1, nobody ahead found it.
+            return i;               // 5. Check yourself! If you match, YOU are the last occurrence.
+        }
+        return isFound ;
+    }
+
+//-----------------------------------------------------------------------------------------------------------
+
+    public static int powExp (int x , int n ){
+        if( n==1 ){
+            return x ;
+        }
+        return x * powExp(x ,n-1);
+    }
+
+//-----------------------------------------------------------------------------------------------------------
+
+    public static int optPow(int a , int n ){
+        if (n == 0 ){
+            return 1 ;
+        }
+        // but still this is O(n) cause we are calling function two times to make
+        // O (log n ) store one call in one variable then make it sqaure
+        int halfSq = optPow(a,n/2);
+        int halfPow = halfSq * halfSq ;// now internally its calculating faster with variable
+        // n is odd
+        if(n%2 != 0){
+            halfPow = a * halfPow ;
+        }
+        return halfPow ;
+    }
+
+//-------------------------------------------------------------------------------------------------------------
 }
