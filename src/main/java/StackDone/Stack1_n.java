@@ -1,6 +1,8 @@
 package StackDone;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Stack;
 
 public class Stack1_n {
@@ -286,6 +288,30 @@ public class Stack1_n {
             return false;
         }
     }
+//-------------------------------------------------------------------------------------------------------------
+
+// optimised for valid:- Using Deque
+    public boolean isValidOtpimised(String s) {
+        // Optimization 1: ArrayDeque is faster than Stack class
+        Deque<Character> stack = new ArrayDeque<>();
+
+        for (char ch : s.toCharArray()) {
+            // Optimization 2: Push the "Expected" closer
+            if (ch == '(') {
+                stack.push(')');
+            } else if (ch == '{') {
+                stack.push('}');
+            } else if (ch == '[') {
+                stack.push(']');
+            }
+            // If it's a closer, it MUST match the popped element exactly
+            else if (stack.isEmpty() || stack.pop() != ch) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
 //----------------------------------------------------------------------------------------------------------------
 
     private static void stockSpan(int[] stock, int[] span) {

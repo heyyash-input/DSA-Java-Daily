@@ -13,8 +13,9 @@ public class Recursion1_n {
         int arr [] = {8,3,6,9,5,10,2 ,5 ,3 ,9};
 //        System.out.println(firstOcc(arr,5,0));
 //        System.out.println(lastOcc(arr,5,0));
-        System.out.println(powExp(2,10));
-        System.out.println(optPow(2,5));
+//        System.out.println(powExp(2,10));
+//        System.out.println(optPow(2,5));
+        System.out.println(tilingProb(3));
     }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -203,4 +204,18 @@ public class Recursion1_n {
     }
 
 //-------------------------------------------------------------------------------------------------------------
+    public static int tilingProb (int n ){ // 2 X n
+        if ( n ==0 || n ==1){
+            return 1 ;
+        }
+        //kam
+        //vertical
+        int verTiles = tilingProb(n-1);
+
+        //horizontal
+        int horTiles = tilingProb(n-2);
+
+        int total = verTiles + horTiles ;
+        return total;
+    }
 }
