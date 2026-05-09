@@ -287,7 +287,12 @@ public class Recursion1_n {
 
     public static void subset ( String s  , String ans , int i){
         if ( i == s.length()){
-            System.out.println(ans);
+            if(ans.length() == 0 ) {
+                System.out.println("{ null }");
+                return;
+            }else {
+                System.out.println(ans);
+            }
             return;
         }
         char ch = s.charAt(i);
