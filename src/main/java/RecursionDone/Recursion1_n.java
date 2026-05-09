@@ -10,12 +10,17 @@ public class Recursion1_n {
 //        System.out.println(fibo(n));
 //        int arr [] = {1 , 2, 3 ,4  };
 //        System.out.println(isSorted(arr,0));
-        int arr [] = {8,3,6,9,5,10,2 ,5 ,3 ,9};
+//        int arr [] = {8,3,6,9,5,10,2 ,5 ,3 ,9};
 //        System.out.println(firstOcc(arr,5,0));
 //        System.out.println(lastOcc(arr,5,0));
 //        System.out.println(powExp(2,10));
 //        System.out.println(optPow(2,5));
-        System.out.println(tilingProb(3));
+//        System.out.println(tilingProb(3));
+//        String str = "appnacollege";
+//        removeDuplicates(str , 0 , new StringBuilder() , new boolean [26]);
+//        System.out.println(friendsPair(3));
+//            printBinaryString(3,0,new StringBuilder(""));
+            subset("abc","",0);
     }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -218,4 +223,82 @@ public class Recursion1_n {
         int total = verTiles + horTiles ;
         return total;
     }
+
+//---------------------------------------------------------------------------------------------------------------
+
+    public static void removeDuplicates (String str , int idx , StringBuilder sb , boolean map []){
+        if(idx == str.length()){
+            System.out.println(sb);
+            return;
+        }
+        char ch = str.charAt(idx);
+        if(map[ch - 'a'] == true){
+            // duplicate hae
+            removeDuplicates(str , idx+1 , sb , map );
+        }else {
+            // not duplicate add it to sb
+            map[ch - 'a'] = true;
+            removeDuplicates(str, idx+1, sb.append(ch), map);
+        }
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+
+    public static int friendsPair(int n ){
+        if (n == 1 || n == 2){
+            return n ;
+        }
+        return friendsPair(n-1) + friendsPair(n-1) * friendsPair(n-2);
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+
+    public static void printBinaryString ( int n , int lastPlace , StringBuilder str){
+//        if ( lastPlace == 0){
+//            printBinaryString(n-1,0 , str.append("0"));
+//            printBinaryString(n-1,1 , str.append("1"));
+//        }else{
+//            printBinaryString(n-1,0 , str.append("0"));
+//        }
+        if (n == 0 ){
+            System.out.println(str); //Empty also
+            return;
+        }
+        printBinaryString(n-1,0 , str.append("0"));
+        if(lastPlace == 0){
+            printBinaryString(n-1,1 , str.append("1"));
+        }
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+//
+//    Level 0:                             (abc, "", 0)
+//                                         /          \
+//    Level 1:                  (Include 'a')         (Exclude 'a')
+//                              (abc, "a", 1)            (abc, "", 1)
+//                                 /        \            /        \
+//    Level 2:                (Inc 'b')     (Exc 'b')    (Inc 'b')   (Exc 'b')
+//                          (abc, "ab", 2) (abc, "a", 2) (abc, "b", 2) (abc, "", 2)
+//                             /      \       /      \      /      \      /      \
+//    Level 3:            (Inc 'c')(Exc 'c')(Inc 'c')(Exc 'c')(Inc 'c')(Exc 'c')(Inc 'c')(Exc 'c')
+//                           "abc"    "ab"     "ac"     "a"      "bc"     "b"      "c"      ""
+//                             |        |        |        |        |        |        |        |
+//                        [Print]  [Print]  [Print]  [Print]  [Print]  [Print]  [Print]  [Print]
+
+    public static void subset ( String s  , String ans , int i){
+        if ( i == s.length()){
+            System.out.println(ans);
+            return;
+        }
+        char ch = s.charAt(i);
+        // include for first
+        subset(s, ans + ch,i+1);
+        // dont include
+        subset(s,ans,i+1);
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+
+
 }
+
