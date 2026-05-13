@@ -2,6 +2,7 @@ package RecursionDone;
 
 public class Recursion1_n {
     public static void main(String[] args) {
+        // revised all questions weekly
 //        int n = 10;
 //        descendingNum(n);
 //        System.out.println(fact(n));
