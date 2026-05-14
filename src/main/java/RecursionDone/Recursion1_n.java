@@ -1,5 +1,8 @@
 package RecursionDone;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Recursion1_n {
     public static void main(String[] args) {
         // revised all questions weekly
@@ -301,6 +304,49 @@ public class Recursion1_n {
         subset(s, ans + ch,i+1);
         // dont include
         subset(s,ans,i+1);
+    }
+
+//----------------------------------------------------------------------------------------------------------------
+
+    // in arraylist:-
+    /**
+     * SUBSETS (Power Set)
+     * -------------------
+     * This implementation uses Backtracking.
+     *
+     * Key Learning: Unlike Strings, Lists are mutable. We use:
+     * 1. current.add(x) to include an element.
+     * 2. result.add(new ArrayList<>(current)) to save the state.
+     * 3. current.remove(size-1) to backtrack (Undo the choice).
+     *
+     * Complexity:
+     * - Time: O(n * 2^n) - 2^n subsets, each taking O(n) to copy.
+     * - Space: O(n) - Maximum depth of the recursion stack.
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        // Start recursion with an empty "current" list and index 0
+        generateSubsets(0, nums, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void generateSubsets(int i, int[] nums, List<Integer> current, List<List<Integer>> result) {
+        // BASE CASE: If we've considered all elements
+        if (i == nums.length) {
+            // CRITICAL: We must add a NEW copy of 'current'
+            result.add(new ArrayList<>(current));
+            return;
+        }
+
+        // CHOICE 1: Include nums[i]
+        current.add(nums[i]);
+        generateSubsets(i + 1, nums, current, result);
+
+        // BACKTRACK: Remove the last element to "clean up" the list for the next branch
+        current.remove(current.size() - 1);
+
+        // CHOICE 2: Exclude nums[i]
+        generateSubsets(i + 1, nums, current, result);
     }
 
 //-------------------------------------------------------------------------------------------------------------
