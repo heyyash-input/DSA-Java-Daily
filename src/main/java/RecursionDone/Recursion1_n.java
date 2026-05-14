@@ -304,6 +304,50 @@ public class Recursion1_n {
     }
 
 //-------------------------------------------------------------------------------------------------------------
+//  for negative values:-
+//    Input: x = 2.00000, n = -2
+//    Output: 0.25000
+//    Explanation: 2-2 = 1/22 = 1/4 = 0.25
+    public double myPow(double x, int n) {
+    // 1. Handle the "Integer Overflow" Edge Case:
+    // Integer.MIN_VALUE (-2147483648) doesn't have a positive counterpart in 'int'.
+    // We cast 'n' to 'long' to safely convert negative exponents to positive.
+        long N = n;
+
+    // 2. Handle Negative Exponents:
+    // Mathematically, x^(-n) is the same as (1/x)^n.
+    // We invert the base and flip the sign of the exponent to simplify logic.
+        if (N < 0) {
+            x = 1 / x;
+            N = -N;
+        }
+    return solve(x, N);
+}
+
+    private double solve(double x, long n) {
+        // 3. Base Case:
+        // Any number raised to the power of 0 is always 1.
+        if (n == 0) {
+            return 1.0;
+        }
+
+        // 4. Divide and Conquer (Binary Exponentiation):
+        // Instead of multiplying x by itself n times (O(n)),
+        // we calculate the power for n/2 and store it to avoid redundant work.
+        double halfPow = solve(x, n / 2);
+
+        // 5. Combine Results:
+        // If n is even: x^n = (x^(n/2)) * (x^(n/2))
+        // If n is odd:  x^n = (x^(n/2)) * (x^(n/2)) * x
+        if (n % 2 == 0) {
+            return halfPow * halfPow;
+        } else {
+            return halfPow * halfPow * x;
+        }
+    }
+
+//----------------------------------------------------------------------------------------------------------------
+
 
 
 }
