@@ -350,6 +350,38 @@ public class Recursion1_n {
     }
 
 //-------------------------------------------------------------------------------------------------------------
+    // Duplicate subset :-
+//    public List<List<Integer>> subsetsWithDup(int[] nums) {
+//        List<List<Integer>> result = new ArrayList<>();
+//        // 1. Sort to bring duplicates together
+//        Arrays.sort(nums);
+//
+//        generateSubsets(0, nums, new ArrayList<>(), result);
+//        return result;
+//    }
+//
+//    private void generateSubsets(int index, int[] nums, List<Integer> current, List<List<Integer>> result) {
+//        // Every state in the decision tree is a valid subset
+//        result.add(new ArrayList<>(current));
+//
+//        for (int i = index; i < nums.length; i++) {
+//            // 2. CRITICAL: Skip duplicates
+//            // If i > index, it means we are exploring alternative choices
+//            // at the SAME level of the tree.
+//            if (i > index && nums[i] == nums[i - 1]) {
+//                continue;
+//            }
+//
+//            // Move forward with the choice
+//            current.add(nums[i]);
+//            generateSubsets(i + 1, nums, current, result);
+//
+//            // Backtrack
+//            current.remove(current.size() - 1);
+//        }
+//    }
+
+//-------------------------------------------------------------------------------------------------------------
 //  for negative values:-
 //    Input: x = 2.00000, n = -2
 //    Output: 0.25000
