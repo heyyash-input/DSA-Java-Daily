@@ -3,6 +3,8 @@ package RecursionDone;
 import java.util.ArrayList;
 import java.util.List;
 
+// Revised all the edge cases and logic:-
+
 public class Recursion1_n {
     public static void main(String[] args) {
         // revised all questions weekly
@@ -354,7 +356,7 @@ public class Recursion1_n {
 //    public List<List<Integer>> subsetsWithDup(int[] nums) {
 //        List<List<Integer>> result = new ArrayList<>();
 //        // 1. Sort to bring duplicates together
-//        Arrays.sort(nums);
+//        Arrays.sort(nums);c
 //
 //        generateSubsets(0, nums, new ArrayList<>(), result);
 //        return result;
@@ -425,6 +427,15 @@ public class Recursion1_n {
     }
 
 //----------------------------------------------------------------------------------------------------------------
+
+    public static void revision(int n){
+        if (n == 0){
+
+        }
+
+    }
+        
+//---------------------------------------------------------------------------------------------------------------
 
 
 

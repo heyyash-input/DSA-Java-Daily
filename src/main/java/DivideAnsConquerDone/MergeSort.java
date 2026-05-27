@@ -42,10 +42,10 @@ public class MergeSort {
                 temp[k++] = arr[j++];
             }
         }
-        //copy temp to my original arr
-        for (k = 0 ; i = si ; k < temp.length; k++ ; i++) {
-
-        }
+//        //copy temp to my original arr
+//        for (k = 0 ; i = si ; k < temp.length; k++ ; i++) {
+//
+//        }
 
     }
     public static void main(String[] args) {

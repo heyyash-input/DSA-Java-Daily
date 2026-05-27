@@ -54,5 +54,8 @@ public class fundamentals {
         System.out.println("max element " + max);
 
 // --------------------------------------------------------------------------------------------------------------
+
+        //Swap 2 numbers:-
+
     }
 }
