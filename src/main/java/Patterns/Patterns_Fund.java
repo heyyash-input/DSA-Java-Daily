@@ -8,6 +8,25 @@ public class Patterns_Fund {
 //        invertedPat(5);
 //        triUpsidePat(5);
 //        halfPyramid(5);
+        hollowRectangle(10,11);
+    }
+
+//------------------------------------------------------------------------------------------------------------------
+
+    public static void hollowRectangle(int totalRows , int totalCol){
+        // outer loos:-
+        for (int i = 1; i <= totalRows ; i++) {
+            //inner colums
+            for (int j = 1; j <= totalCol; j++) {
+                // cell  - (i,j)
+                if(i == 1 || i == totalRows || j ==1   || j == totalRows){
+                    System.out.print("*");
+                }else{
+                    System.out.print("");
+                }
+            }
+            System.out.println();
+        }
     }
 
 //------------------------------------------------------------------------------------------------------------------
