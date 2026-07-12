@@ -32,10 +32,16 @@ public class RevisionTemplate {
 //        printSubarray(arr);
 
         // Trapping Rainwater:-
-        int height [] = {4 , 2 , 0 , 6 , 3 , 2 , 5} ;
-        System.out.println(trappedRainwater(height));
+//        int height [] = {4 , 2 , 0 , 6 , 3 , 2 , 5} ;
+//        System.out.println(trappedRainwater(height));
+
+        //Stock Buy and sell:-
+        int prices [] = {7 ,1 , 5 , 3, 6  , 4 };
+        System.out.println(buyAndSellStocks(prices));
     }
 
+//------------------------------------------------------------------------------------------------------------
+    /// Trapping Rainwater Prob VVVIMPP:-
     public static int trappedRainwater(int height[]) {
         int n = height.length;
         if (n <= 2) return 0; // Edge case: No water can be trapped with less than 3 bars
@@ -67,4 +73,28 @@ public class RevisionTemplate {
 
         return trapped;
     }
+//------------------------------------------------------------------------------------------------------------
+
+    // Stock buy and sell:-
+    public static int buyAndSellStocks(int prices []){
+
+        int n = prices.length;
+        int buyPrice = Integer.MAX_VALUE;
+        int maxProfit = Integer.MIN_VALUE; // or keep '0' as per the Test Cases ;
+
+        for (int i = 0; i < n ; i++) {
+            if(buyPrice < prices[i]){
+                int profit = prices[i]  - buyPrice ; // todays profit:
+                maxProfit = Math.max(maxProfit , profit); // maximum total profit:
+            }
+            else{
+                // if less then make it equal to prices:
+                buyPrice = prices[i];
+            }
+        }
+        return maxProfit ;
+    }
+
+//------------------------------------------------------------------------------------------------------------
+
 }
