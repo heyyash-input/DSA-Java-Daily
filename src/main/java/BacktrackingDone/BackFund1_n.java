@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 public class BackFund1_n {
 
-    // fundamnetals for back tracking
-
+    // fundamentals for back tracking:
     public static void main(String[] args) {
-        int arr [] = new int[5] ;
+//        int arr [] = new int[5] ;
 //        arrBack(arr, 0 , 1 );
 //        printArr(arr);
 
@@ -16,26 +15,34 @@ public class BackFund1_n {
 
 //--------------------------------------------------------------------------------------------------------------
         // NQueens:
-        int n = 4;
-        char board [] [] = new char[n][n] ;
+//        int n = 4;
+//        char board [] [] = new char[n][n] ;
+//
+//        //intialize:
+//        for (int i = 0; i < n; i++) {
+//            for (int j = 0; j < n ; j++) {
+//                board[i][j] = 'X';
+//            }
+//        }
+//        nQueens(board , 0 );
+//        System.out.println("total ways: " + count);
+//--------------------------------------------------------------------------------------------------------------
+        //Grid Path:
+        int n= 3 , m = 3 ;
+        System.out.println(gridPath(0  , 0 ,n  , m));
 
-        //intialize:
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n ; j++) {
-                board[i][j] = 'X';
-            }
-        }
-        nQueens(board , 0 );
-        System.out.println("total ways: " + count);
     }
 //--------------------------------------------------------------------------------------------------------------------
+
     public static void printArr(int arr []){
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i]+" ");
         }
         System.out.println();
     }
+
 //------------------------------------------------------------------------------------------------------------------
+
     public static void arrBack(int arr [] , int i , int val ){
         //base case
         if( i == arr.length){
@@ -143,5 +150,24 @@ public class BackFund1_n {
 //     time complexcity : -
 //---------------------------------------------------------------------------------------------------------------
 
-    //
+    //Grid path questions to find number of ways :
+
+    public static int gridPath(int i , int j , int n , int m){
+
+        // condition for last stage:
+        if(i == n-1 && j == m-1){
+            return 1 ;
+        }
+        //Boundary cnondition:
+        else if (i == n || j == m) {
+            return 0 ;
+        }
+
+        int w1 = gridPath(i+1 ,j , n  ,m );
+        int w2 = gridPath(i,j + 1  , n  ,m );
+        return w1 + w2 ;
+        // TC:- O(2^m*n)
+        // using permutation formula we can convert it to - O(m*n)
+    }
+
 }
