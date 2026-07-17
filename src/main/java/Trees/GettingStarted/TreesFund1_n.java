@@ -1,5 +1,8 @@
 package Trees.GettingStarted;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  *  TREE RECURSION & DFS TRAVERSAL TEMPLATES
  * This module demonstrates how structural recursion navigates a binary tree.
@@ -88,6 +91,45 @@ public class TreesFund1_n {
             postorder(root.right);             // 2. Traverse down into the Right Subtree
             System.out.print(root.data + " "); // 3. Process/Print the Current Node (Root) last
         }
+//-------------------------------------------------------------------------------------------------------------
+
+        public static void levelOrder(Node root){
+
+            if (root  == null){
+                return;
+            }
+            Queue<Node> q = new LinkedList<>() ;
+            q.add(root) ;
+            q.add(null);
+
+            while (!q.isEmpty()){
+                Node currNode = q.remove();
+                if(currNode == null){
+                    System.out.println();
+
+                    if(q.isEmpty()){
+                        break;
+                    }else{
+                        q.add(null);
+                    }
+                }else {
+                    System.out.print(currNode.data+" ");
+                    if(currNode.left != null){
+                        q.add(currNode.left);
+                    }
+                    if(currNode.right != null){
+                        q.add(currNode.right);
+                    }
+                }
+            }
+        }
+
+//-------------------------------------------------------------------------------------------------------------
+
+//        public static void treeHeight(Node root){
+//
+//        }
+//-------------------------------------------------------------------------------------------------------------
     }
 //-------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -98,20 +140,22 @@ public class TreesFund1_n {
         BinaryTree.idx = -1;
         Node root = BinaryTree.buildTree(nodes);
 
-        System.out.println("--- Tree Traversal Test Execution ---");
-        System.out.println("Root Node: " + root.data + "\n");
+//        System.out.println("--- Tree Traversal Test Execution ---");
+//        System.out.println("Root Node: " + root.data + "\n");
+//
+//        System.out.print("Pre-order  (Root->L->R): ");
+//        BinaryTree.preorder(root);
+//        System.out.println();
+//
+//        System.out.print("In-order   (L->Root->R): ");
+//        BinaryTree.inorder(root);
+//        System.out.println();
+//
+//        System.out.print("Post-order (L->R->Root): ");
+//        BinaryTree.postorder(root);
+//        System.out.println();
 
-        System.out.print("Pre-order  (Root->L->R): ");
-        BinaryTree.preorder(root);
-        System.out.println();
-
-        System.out.print("In-order   (L->Root->R): ");
-        BinaryTree.inorder(root);
-        System.out.println();
-
-        System.out.print("Post-order (L->R->Root): ");
-        BinaryTree.postorder(root);
-        System.out.println();
+        BinaryTree.levelOrder(root);
     }
 //-------------------------------------------------------------------------------------------------------------
 }
