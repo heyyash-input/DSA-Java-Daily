@@ -65,6 +65,9 @@ public class Questions {
         /// Top View:-
 //        System.out.println(topView(root));
         topView(root);
+
+        /// Kth level:-
+        kthLevel(root , 1 , 3);
     }
 //---------------------------------------------------------------------------------------------------------------
     public static int height(Node root){
@@ -208,4 +211,19 @@ public class Questions {
         System.out.println();
     }
 //-------------------------------------------------------------------------------------------------------------
+
+    ///Kth Level of tree:-
+    public static void kthLevel(Node root , int  level , int k ){
+        if(root == null ){
+            return;
+        }
+
+        if(level == k ){
+            System.out.print(root.data +" ");
+            return;
+        }
+        kthLevel(root.left , level + 1 , k );
+        kthLevel(root.right , level + 1 , k );
+    }
+
 }
