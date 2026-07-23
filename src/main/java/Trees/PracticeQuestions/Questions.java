@@ -1,5 +1,6 @@
 package Trees.PracticeQuestions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -45,7 +46,8 @@ public class Questions {
         Node subRoot = new Node(2);
         subRoot.left = new Node(4);
 //        subRoot.right = new Node(7);
-//////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// Height of a Tree by Nodes:-
         System.out.println(height(root));
@@ -68,6 +70,15 @@ public class Questions {
 
         /// Kth level:-
         kthLevel(root , 1 , 3);
+
+        /// LCA:-
+        int n1 = 4, n2 = 6;
+        Node lcaNode = lca(root, n1, n2);
+        if (lcaNode != null) {
+            System.out.println("LCA of " + n1 + " and " + n2 + ": " + lcaNode.data);
+        }
+
+
     }
 //---------------------------------------------------------------------------------------------------------------
     public static int height(Node root){
@@ -225,5 +236,51 @@ public class Questions {
         kthLevel(root.left , level + 1 , k );
         kthLevel(root.right , level + 1 , k );
     }
+//-------------------------------------------------------------------------------------------------------------
 
+    /// Lowest Common Ancestor:-
+
+    public static boolean getPath(Node root, int n, ArrayList<Node> path) {
+        if (root == null) {
+            return false;
+        }
+
+        path.add(root);
+
+        if (root.data == n) {
+            return true;
+        }
+
+        boolean foundLeft = getPath(root.left, n, path);
+        boolean foundRight = getPath(root.right, n, path);
+
+        if (foundLeft || foundRight) {
+            return true;
+        }
+
+        path.remove(path.size() - 1); // Backtrack step
+        return false;
+    }
+
+    public static Node lca(Node root, int n1, int n2) {
+        // Create paths for storing route:
+        ArrayList<Node> p1 = new ArrayList<>();
+        ArrayList<Node> p2 = new ArrayList<>();
+
+        getPath(root, n1, p1);
+        getPath(root, n2, p2);
+
+
+        int i = 0;
+
+        for (; i < p1.size() && i < p2.size(); i++) {
+            if (p1.get(i) != p2.get(i)) {
+                break;
+            }
+        }
+        // Last matching ancestor is at index (i - 1)
+        Node lca = p1.get(i - 1);
+        return lca;
+    }
+//-------------------------------------------------------------------------------------------------------------
 }
