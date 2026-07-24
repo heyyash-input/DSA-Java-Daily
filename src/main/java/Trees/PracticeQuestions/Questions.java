@@ -84,7 +84,8 @@ public class Questions {
         /// Minimum Distance in tree:-
         System.out.println(minDistance(root , 4 ,6));
 
-        ///
+        ///Kth ancestor Node:-
+        System.out.println(kthAncestor(root , 5 , 1));
 
     }
 //---------------------------------------------------------------------------------------------------------------
@@ -349,4 +350,28 @@ public class Questions {
 
     }
 //-------------------------------------------------------------------------------------------------------------
+
+    /// Kth ancestor of node:-
+    public static int kthAncestor(Node root , int n , int k){
+
+        if(root == null){
+            return -1 ;
+        }
+
+        if(root.data == n){
+            return 0 ;
+        }
+        int leftDist = kthAncestor(root.left , n , k );
+        int rightDist = kthAncestor(root.right , n , k );
+
+        if(leftDist == -1 && rightDist == -1){
+            return -1 ;
+        }
+
+        int max = Math.max(leftDist ,rightDist);
+        if(max+1 ==k ){
+            System.out.println(root.data);
+        }
+        return max + 1 ;
+    }
 }
