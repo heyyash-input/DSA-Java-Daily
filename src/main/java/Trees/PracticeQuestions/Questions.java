@@ -78,6 +78,8 @@ public class Questions {
             System.out.println("LCA of " + n1 + " and " + n2 + ": " + lcaNode.data);
         }
 
+        /// (Optimal) LCA :-2
+        System.out.println(lca2(root , 4 ,5).data);
 
     }
 //---------------------------------------------------------------------------------------------------------------
@@ -239,7 +241,6 @@ public class Questions {
 //-------------------------------------------------------------------------------------------------------------
 
     /// Lowest Common Ancestor:-
-
     public static boolean getPath(Node root, int n, ArrayList<Node> path) {
         if (root == null) {
             return false;
@@ -283,4 +284,31 @@ public class Questions {
         return lca;
     }
 //-------------------------------------------------------------------------------------------------------------
+
+    //LCA mehode:-2
+    public static Node  lca2(Node root ,int n1 , int n2  ){
+//            if (root == null ){
+//                return null ;
+//            }
+
+        if( root == null  ||  root.data == n1 || root.data == n2){
+            return root ;
+        }
+
+        lca2(root.left , n1, n2 );
+        Node rightLca = lca2(root.right , n1 , n2 );
+        Node leftLca = lca2(root.left , n1 , n2 );
+
+        //leftLca
+        if (rightLca == null){
+            return leftLca;
+        }
+        //Right
+        if(leftLca == null ){
+            return rightLca;
+        }
+
+        return root ;
+    }
+//--------------------------------------------------------------------------------------------------------------
 }
