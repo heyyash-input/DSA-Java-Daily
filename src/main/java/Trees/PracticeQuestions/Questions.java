@@ -81,6 +81,11 @@ public class Questions {
         /// (Optimal) LCA :-2
         System.out.println(lca2(root , 4 ,5).data);
 
+        /// Minimum Distance in tree:-
+        System.out.println(minDistance(root , 4 ,6));
+
+        ///
+
     }
 //---------------------------------------------------------------------------------------------------------------
     public static int height(Node root){
@@ -311,4 +316,37 @@ public class Questions {
         return root ;
     }
 //--------------------------------------------------------------------------------------------------------------
+
+    /// Minimun Distance in tree:-
+    public static int  lcaDist(Node root , int n){
+        if(root == null ){
+            return -1 ;
+        }
+
+        if(root.data == n){
+            return 0 ;
+        }
+
+        int leftDist = lcaDist(root.left , n);
+        int rightDist = lcaDist(root.right , n);
+
+        if(leftDist == -1 && rightDist == -1 ){
+            return -1 ;
+        } else if (leftDist == -1) {
+            return rightDist + 1;
+        }else{
+            return leftDist + 1 ;
+        }
+    }
+
+    public static int minDistance(Node root , int n1 , int n2){
+
+        Node lca = lca2(root , n1 , n2 );
+        int  dist1 = lcaDist(root , n1 );
+        int  dist2 = lcaDist(root , n2 );
+
+        return dist1 + dist2 ;
+
+    }
+//-------------------------------------------------------------------------------------------------------------
 }
