@@ -18,7 +18,9 @@ public class SlidingWindow1_n {
 //        System.out.println(SubarrayVariableSmallest(arr,k));
         System.out.println(MinimumWindowSubstring(s,t));
     }
+
 //----------------------------------------------------------------------------------------------------------------
+
 //    Practice these by hard always asked in interview
     public static int TemplateSlidingWindow(int [] arr,int k){
         int i = 0 ;
@@ -113,12 +115,13 @@ public class SlidingWindow1_n {
                 i++;
             }
         }
-        return sum ;
+        return sum;
     }
 
 //---------------------------------------------------------------------------------------------------------------
+
 //    VVVIMP
-// Variable subarray
+//    Variable subarray
 //    This was also asked in interview personally recommend you
     public static int SubarrayVariableSmallest(int[] arr,int k ){
         int i = 0 ;
@@ -159,8 +162,8 @@ public class SlidingWindow1_n {
     }
 
 //---------------------------------------------------------------------------------------------------------------
-    // Count Ocurrance of Anagrams
 
+    // Count Ocurrance of Anagrams
     public static int CountOccurance(String pat , String txt){
         int k = pat.length();
         int n = txt.length();
@@ -200,6 +203,7 @@ public class SlidingWindow1_n {
 
 //-----------------------------------------------------------------------------------------------------------------
 
+// VVIMPP:- Interview Related:- (Pattern Sliding window (variable size + marking)):-
     public static String  MinimumWindowSubstring(String s , String t){
       int countS [] =  new int [128];
       int countT [] = new int  [128];
@@ -262,8 +266,7 @@ public class SlidingWindow1_n {
 
 //    Majority elements Questions:-
 //    n/3:-
-//    for any n/k majority add more k+1 cand and counts , Boyr Moore Voting thoerm:-
-
+///    for any n/k majority add more k+1  and counts , Boyr Moore Voting thoerm:-
     public static List<Integer> majorityElement(int [] nums){
         List<Integer> result = new ArrayList<>() ;
         int cand1 = Integer.MIN_VALUE , c1 = 0 ;
