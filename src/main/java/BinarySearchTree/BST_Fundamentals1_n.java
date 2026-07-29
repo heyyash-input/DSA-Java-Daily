@@ -1,6 +1,9 @@
 package BinarySearchTree;
 
+import java.util.ArrayList;
+
 public class BST_Fundamentals1_n {
+
 //----------------------------------------------------------------------------------------------------------------
     static class Node {
          int data ;
@@ -11,10 +14,13 @@ public class BST_Fundamentals1_n {
              this.data = data;
          }
     }
+
+//----------------------------------------------------------------------------------------------------------------
+
     public static void main(String[] args) {
 
         /// Insert:-
-        int values [] = {5 , 1 ,3,4 ,2 ,7};
+        int values [] = {8 ,5 , 3 , 1 ,4 ,6 ,10 ,11 ,14};
         Node root = null ;
 
         for (int i = 0; i < values.length; i++) {
@@ -22,18 +28,25 @@ public class BST_Fundamentals1_n {
         }
         inorder(root);
         System.out.println();
+//
+//        /// Search:-
+//        if(search(root,1)){
+//            System.out.println("Found!");
+//        }else{
+//            System.out.println("Not Found!");
+//        }
+//
+//        /// Delete:-
+//        root = delete(root ,1 );
+//        System.out.println();
+//        inorder(root);
 
-        /// Search:-
-        if(search(root,1)){
-            System.out.println("Found!");
-        }else{
-            System.out.println("Not Found!");
-        }
+        /// Print in range:-
+       printRange(root , 5 , 12); // output:- {5,6,8,10,11 }
 
-        /// Delete:-
-        root = delete(root ,1 );
-        System.out.println();
-        inorder(root);
+        ///Root to leaf path:-
+
+        printRoot2Leaf(root , new ArrayList<>());
 
     }
 
@@ -128,4 +141,66 @@ public class BST_Fundamentals1_n {
 
 //---------------------------------------------------------------------------------------------------------------
 
+    /// Print in Range:-
+    public static void printRange(Node root , int k1 , int k2 ) {
+
+        //base case:-
+        if (root == null) {
+            return;
+        }
+
+        //case 3 :- compare in range for every node
+        if (root.data >= k1 && root.data <= k2) {
+            printRange(root.left, k1, k2);
+            System.out.println(root.data + " ");
+            printRange(root.right, k1, k2);
+        }
+
+        //case 1 :- if greater
+        else if (root.data >= k2) {
+            printRange(root.right, k1, k2);
+        }
+
+        //case 2 :- if less than
+        else {
+            printRange(root.left, k1, k2);
+        }
+    }
+
+//---------------------------------------------------------------------------------------------------------------
+
+    ///Root to leaf Paths:-
+
+    public static void printPath (ArrayList<Integer> path){
+        for (int i = 0; i < path.size(); i++) {
+            System.out.print(path.get(i)+ " -> " );
+        }
+        System.out.println("Null");
+    }
+    public static void printRoot2Leaf(Node root , ArrayList<Integer> path){
+
+        if(root == null){
+            return;
+        }
+
+        //Add every root data first:
+        path.add(root.data);
+
+        //Then check for base case:
+        if(root.left == null && root.right == null){
+            printPath(path);
+        }
+
+        //got for left data then right
+        printRoot2Leaf(root.left,path);
+        printRoot2Leaf(root.right,path);
+
+        //backtrack from last
+        path.remove(path.size()-1);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+
+    /// Valid Bs
+    public static boolean isValidBST()
 }
