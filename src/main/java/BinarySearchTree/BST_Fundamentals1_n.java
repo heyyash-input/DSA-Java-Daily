@@ -19,15 +19,15 @@ public class BST_Fundamentals1_n {
 
     public static void main(String[] args) {
 
-        /// Insert:-
-        int values [] = {8 ,5 , 3 , 1 ,4 ,6 ,10 ,11 ,14};
-        Node root = null ;
-
-        for (int i = 0; i < values.length; i++) {
-            root = insert(root , values[i]);
-        }
-        inorder(root);
-        System.out.println();
+//        /// Insert:-
+//        int values [] = {8 ,5 , 3 , 1 ,4 ,6 ,10 ,11 ,14};
+//        Node root = null ;
+//
+//        for (int i = 0; i < values.length; i++) {
+//            root = insert(root , values[i]);
+//        }
+//        inorder(root);
+//        System.out.println();
 //
 //        /// Search:-
 //        if(search(root,1)){
@@ -41,13 +41,45 @@ public class BST_Fundamentals1_n {
 //        System.out.println();
 //        inorder(root);
 
-        /// Print in range:-
-       printRange(root , 5 , 12); // output:- {5,6,8,10,11 }
+//        /// Print in range:-
+//       printRange(root , 5 , 12); // output:- {5,6,8,10,11 }
+//
+//        ///Root to leaf path:-
+//        printRoot2Leaf(root , new ArrayList<>());
+//
+//        /// Valid BST:-
+//       if( isValidBST(root , null , null)){
+//           System.out.println("Valid");
+//        }else{
+//           System.out.println("not Valid");
+//       }
 
-        ///Root to leaf path:-
+       ///Mirror BST:-
+        /*
+                    8
+                   / \
+                  5   10
+                 / \    \
+                3   6    11
+         */
+        Node root = new Node(8);
+        root.left = new Node(5);
+        root.right = new Node(10);
+        root.left.left = new Node(3);
+        root.left.right = new Node(6);
+        root.right.right = new Node(11);
+        // to get the value create new variable root
+        // then call preorder funtion to traverse each and every ndoe then print:-
+        System.out.println(mirrorBST(root).data);
 
-        printRoot2Leaf(root , new ArrayList<>());
-
+        /*
+         * MIRROR BST (Swapped Left & Right children at every level):
+         *          8
+         *        /   \
+         *       10    5
+         *      /     / \
+         *     11    6   3
+         */
     }
 
     public static void inorder(Node root){
@@ -170,7 +202,6 @@ public class BST_Fundamentals1_n {
 //---------------------------------------------------------------------------------------------------------------
 
     ///Root to leaf Paths:-
-
     public static void printPath (ArrayList<Integer> path){
         for (int i = 0; i < path.size(); i++) {
             System.out.print(path.get(i)+ " -> " );
@@ -202,5 +233,39 @@ public class BST_Fundamentals1_n {
 //--------------------------------------------------------------------------------------------------------------
 
     /// Valid Bs
-    public static boolean isValidBST()
+    public static boolean isValidBST(Node root , Node min , Node max){
+        if(root == null ){
+            return true ;
+        }
+
+        if(min!= null && root.data <= min.data){
+            return false;
+        }else if (max != null && root.data >= max.data){
+            return true;
+        }
+
+        return isValidBST(root.left , min ,root)  && isValidBST(root.right , root , max);
+    }
+
+//----------------------------------------------------------------------------------------------------------------
+
+    /// mirror BST:-
+    public static Node mirrorBST(Node root  ){
+
+        if(root == null){
+            return null ;
+        }
+
+       Node leftSubtree = mirrorBST(root.left);
+       Node rightSubtree =  mirrorBST(root.right);
+
+       // copy all the data in left to right so vice versa:-
+       root.left = rightSubtree;
+       root.right = leftSubtree ;
+
+       return root ;
+    }
+//--------------------------------------------------------------------------------------------------------------
+
+    ///
 }
