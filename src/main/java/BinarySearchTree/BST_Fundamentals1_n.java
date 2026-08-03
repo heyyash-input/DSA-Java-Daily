@@ -54,34 +54,55 @@ public class BST_Fundamentals1_n {
 //           System.out.println("not Valid");
 //       }
 
-       ///Mirror BST:-
-        /*
-                    8
-                   / \
-                  5   10
-                 / \    \
-                3   6    11
-         */
+//       ///Mirror BST:-
+//        /*
+//                    8
+//                   / \
+//                  5   10
+//                 / \    \
+//                3   6    11
+//         */
+//        Node root = new Node(8);
+//        root.left = new Node(5);
+//        root.right = new Node(10);
+//        root.left.left = new Node(3);
+//        root.left.right = new Node(6);
+//        root.right.right = new Node(11);
+//        // to get the value create new variable root
+//        // then call preorder funtion to traverse each and every ndoe then print:-
+//        System.out.println(mirrorBST(root).data);
+//
+//        /*
+//         * MIRROR BST (Swapped Left & Right children at every level):
+//         *          8
+//         *        /   \
+//         *       10    5
+//         *      /     / \
+//         *     11    6   3
+//         */
+
+//        /// sorted array to BST :-
+//        int arr [] = {3 , 5, 6 , 8 , 10 , 11 ,12};
+//        Node root = sortedArrToBST(arr ,0 ,arr.length-1);
+//        preorder(root);
+
+        ///  Convert BST to Balanced BST:-
         Node root = new Node(8);
-        root.left = new Node(5);
+        root.left = new Node(6);
+        root.left.left = new Node(5);
+        root.left.left.left = new Node(3);
+
         root.right = new Node(10);
-        root.left.left = new Node(3);
-        root.left.right = new Node(6);
         root.right.right = new Node(11);
-        // to get the value create new variable root
-        // then call preorder funtion to traverse each and every ndoe then print:-
-        System.out.println(mirrorBST(root).data);
+        root.right.right.right = new Node(12);
 
-        /*
-         * MIRROR BST (Swapped Left & Right children at every level):
-         *          8
-         *        /   \
-         *       10    5
-         *      /     / \
-         *     11    6   3
-         */
+       root =  bstToBal(root);
+        preorder(root);
+
     }
+//-------------------------------------------------------------------------------------------------------------
 
+    //Inorder Left - Root - Right :-
     public static void inorder(Node root){
         if(root == null){
             return;
@@ -89,9 +110,27 @@ public class BST_Fundamentals1_n {
         inorder(root.left);
         System.out.print("-> " + root.data);
         inorder(root.right);
-
-
     }
+
+    //Preorder Root - Left - Right :-
+    public static void preorder(Node root){
+        if(root == null){
+            return;
+        }
+        System.out.print("-> " + root.data);
+        preorder(root.left);
+        preorder(root.right);
+    }
+    //PostOrder Left - Right - Root :-
+    public static void postorder(Node root){
+        if(root == null){
+            return;
+        }
+        postorder(root.left);
+        postorder(root.right);
+        System.out.print("-> " + root.data);
+    }
+
 //----------------------------------------------------------------------------------------------------------------
 
     /// Insert in BST :-
@@ -266,6 +305,56 @@ public class BST_Fundamentals1_n {
        return root ;
     }
 //--------------------------------------------------------------------------------------------------------------
+
+    ///sorted array to balanced BST:-
+    public static Node sortedArrToBST(int arr [] , int s , int e){
+
+        if(s > e){
+            return null ;
+        }
+
+        int mid = s + (e - s) / 2;
+        Node root = new Node( arr[mid]);
+        root.left = sortedArrToBST(arr , s , mid -1 );
+        root.right = sortedArrToBST(arr , mid + 1, e);
+
+        return root ;
+    }
+//--------------------------------------------------------------------------------------------------------------
+
+    /// Convert BST to balanced:-
+    public static Node bstToBal(Node root){
+        //inorder seq:-
+        ArrayList<Integer> inorder = new ArrayList<>() ;
+        getInorder(root , inorder);
+
+        //sorted inorder -> balanced
+
+        root = createBST(inorder , 0 , inorder.size()-1);
+        return root ;
+    }
+
+    public static Node createBST(ArrayList<Integer> inorder , int start , int end){
+        if(start > end){
+            return null ;
+        }
+        int mid = start + (end - start) /2 ;
+        Node root = new Node(inorder.get(mid));
+        root.left = createBST(inorder , start , mid -1  );
+        root.right = createBST(inorder ,mid+1 , end );
+
+        return root ;
+    }
+    public static void getInorder(Node root , ArrayList<Integer> inorder) {
+        if(root == null){
+            return;
+        }
+        getInorder(root.left ,inorder);
+        inorder.add(root.data );
+        getInorder(root.right ,inorder);
+    }
+
+//---------------------------------------------------------------------------------------------------------------
 
     ///
 }
