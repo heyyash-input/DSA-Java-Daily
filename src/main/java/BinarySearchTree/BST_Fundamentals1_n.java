@@ -120,7 +120,7 @@ public class BST_Fundamentals1_n {
                     65   80
          */
         Info info = largestBST(root) ;
-        System.out.println("Largest BST size is " + maxBST);
+        System.out.println("Maximum Size of BST in BT is " + maxBST);
 
     }
 //-------------------------------------------------------------------------------------------------------------
@@ -412,7 +412,7 @@ public class BST_Fundamentals1_n {
         int max = Math.max(root.data  , Math.max(leftInfo.max, rightInfo.max));
 
         //calculate isBST:-
-        if(root.data  <= leftInfo.max || root.data >= rightInfo.min){
+        if(root.data  <= leftInfo.min|| root.data >= rightInfo.min){
             return new Info(false , size , min , max);
         }
         if(leftInfo.isBST && rightInfo.isBST ){
