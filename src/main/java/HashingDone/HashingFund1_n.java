@@ -1,6 +1,7 @@
 package HashingDone;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashingFund1_n {
     public static void main(String[] args) {
@@ -23,7 +24,16 @@ public class HashingFund1_n {
             System.out.println("Not Found");
         }
 
-        //Remove O(1):
+        //Iterate:-
+        //map.entrySet():-
+        Set<String> keys = map.keySet();
+        System.out.println(keys);
+
+        for (String k : keys){
+
+            System.out.println("key=" + k + ", value" + map.get(k));
+        }
+
 
     }
 
