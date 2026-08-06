@@ -22,6 +22,15 @@ public class QuestionsHashMap {
         int arr1 [] = {7 , 3 , 9 };
         int arr2 [] = { 6 ,3 ,9 ,2 , 9 , 4 };
         uniAndInter(arr1 , arr2);
+
+        /// Largest Subarray with sum 0:
+        int sub [] = { 15 , -2 , 2 ,-8 ,1 , 7 , 10 , 23};
+        largestSubarrayWithZero(sub);
+
+        /// Subarray sum equals to k:
+        int sub2 [] = {10 ,2 ,-2 , -20 , 10 };
+        int k = -10 ;
+        subarraySumToK(sub2 , k);
     }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -112,7 +121,47 @@ public class QuestionsHashMap {
             }
         }
         System.out.println("My Intersection:" + count);
-
     }
 //-------------------------------------------------------------------------------------------------------------------------
+
+    /// Largest Subarray with sum 0:
+    public static void largestSubarrayWithZero(int sub []){
+        HashMap<Integer , Integer> map = new HashMap<>();
+
+        // (sum , idx ):
+        int sum =0 , len = 0;
+        int n = sub.length;
+        for (int i = 0; i < n; i++) {
+            sum += sub[i]; // calculate all the sum:
+            if(map.containsKey(sum)){
+                len = Math.max(len , i - map.get(sum));
+            }else{
+                map.put(sum , i );
+            }
+        }
+        System.out.println("largest subarray with sum 0 :" + len);
+    }
+
+//-------------------------------------------------------------------------------------------------------------------------
+
+    /// Subarray sum equal to k:
+    public static void subarraySumToK(int sub2 [] , int k ){
+        int n = sub2.length;
+
+        HashMap<Integer , Integer> map = new HashMap<>();
+        map.put(0,1);
+
+        int sum =0 , ans =0 ;
+        for (int i = 0; i < n; i++) {
+            sum += sub2[i]; // sum (i)
+            if(map.containsKey(sum - k )){
+                ans+= map.get(sum - k);
+            }else{
+                map.put(sum , map.getOrDefault(sum , 0)+1);
+            }
+        }
+        System.out.println("Subarray sum equals to k:"+ ans);
+    }
+
+//--------------------------------------------------------------------------------------------------------------------------
 }
