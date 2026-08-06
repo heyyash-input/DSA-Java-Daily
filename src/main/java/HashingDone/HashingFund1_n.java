@@ -1,6 +1,7 @@
 package HashingDone;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 public class HashingFund1_n {
@@ -34,6 +35,14 @@ public class HashingFund1_n {
             System.out.println("key=" + k + ", value" + map.get(k));
         }
 
+
+        /// Linked HashMap:-
+        LinkedHashMap<String , Integer> Hmp = new LinkedHashMap<>();
+        Hmp.put("India" , 100);
+        Hmp.put("US" , 240);
+        Hmp.put("Japan" , 780);
+        Hmp.put("China" , 670);
+        System.out.println(Hmp);
 
     }
 
