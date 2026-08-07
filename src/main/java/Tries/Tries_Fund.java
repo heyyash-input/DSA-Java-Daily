@@ -14,23 +14,63 @@ public class Tries_Fund {
     }
 //------------------------------------------------------------------------------------------------------------------------------
     public static Node root = new Node() ;
+
+    public static boolean wordBreaker(String key){
+
+        for (int i = 1; i < key.length(); i++) {
+            //substring(beg idx , last idx);
+          if(search(key.substring(0 , i)) && wordBreaker(key.substring(i ))){
+              return true;
+          }
+        }
+        return false;
+    }
 //------------------------------------------------------------------------------------------------------------------------------
     public static void insert(String word){
         Node curr = root ;
         for (int level = 0; level < word.length() ; level++) {
             int idx = word.charAt(level) - 'a' ;
             if(curr.children[idx] == null ){
-                curr.children[idx] = new Node() ;
-            }else{
-                curr = curr.children[idx];
+                curr.children[idx] = new Node();
             }
+            curr = curr.children[idx];
         }
         // for end of word true to make sure we successfully ended the word:
         curr.eow = true ;
     }
+//----------------------------------------------------------------------------------------------------------------------------
+    public static boolean search(  String key){
+        Node curr = root ;
+        for (int level = 0; level < key.length(); level++) {
+            int idx = key.charAt(level) - 'a';
+            if(curr.children[idx] == null ){
+                    return false;
+            }
+            curr = curr.children[idx] ;
+        }
+        return curr.eow == true ;
+    }
 //------------------------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
+
         String word[] = {"the" , "a" , "there" , "their" , "any" , "thee"};
+        String arr[] ={"i" , "like" , "sam" , "samsung" , "mobile" , "ice"};
+
+        /// insert:-
+        for (int i = 0; i < word.length; i++) {
+            insert(word[i]);
+        }
+
+        /// search:-
+        System.out.println( search("the"));
+        System.out.println(search("ther"));
+
+        ///Word breaker:
+        for (int i = 0; i < arr.length ; i++) {
+            insert(arr[i]);
+        }
+        String key = "ilikesamsung";
+
     }
 //------------------------------------------------------------------------------------------------------------------------------
 }
