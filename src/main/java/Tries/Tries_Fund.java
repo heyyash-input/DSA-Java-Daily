@@ -6,6 +6,7 @@ public class Tries_Fund {
         Node children [] = new Node [26];
         boolean eow = false;
 
+
         Node(){
             for (int i = 0; i < 26; i++) {
                 children[i] = null ;
@@ -14,8 +15,12 @@ public class Tries_Fund {
     }
 //------------------------------------------------------------------------------------------------------------------------------
     public static Node root = new Node() ;
-
+//------------------------------------------------------------------------------------------------------------------------------
     public static boolean wordBreaker(String key){
+
+        if(key.length() == 0){
+            return true ;
+        }
 
         for (int i = 1; i < key.length(); i++) {
             //substring(beg idx , last idx);
@@ -50,6 +55,10 @@ public class Tries_Fund {
         }
         return curr.eow == true ;
     }
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
 //------------------------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
 
@@ -69,7 +78,8 @@ public class Tries_Fund {
         for (int i = 0; i < arr.length ; i++) {
             insert(arr[i]);
         }
-        String key = "ilikesamsung";
+        String key = "ilikemobile";
+        System.out.println(wordBreaker(key));
 
     }
 //------------------------------------------------------------------------------------------------------------------------------
