@@ -79,6 +79,22 @@ public class Graphs_Fund {
             }
         }
     }
+
+//-----------------------------------------------------------------------------------------------------------------------------
+
+    /// DFS:-
+    public static void dfs(ArrayList<Edge> [] graph , int curr , boolean vis []){
+        //visit
+        System.out.println(curr + " ");
+        vis[curr] = true;
+        for (int i = 0; i < graph[curr].size(); i++) {
+            Edge e =graph[curr].get(i);
+            if(!vis[e.des]){
+                dfs(graph , e.des, vis);
+            }
+        }
+    }
+
 //-----------------------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
 //        /*
@@ -130,6 +146,19 @@ public class Graphs_Fund {
 //        }
 
         /// BFS:-
+//        /*
+//                    1 --- 3
+//                   /      | \
+//                  0       |  5 -- 6
+//                   \      | /
+//                    2 --- 4
+//        */
+//        int Vbfs = 7 ;
+//        ArrayList<Edge> graphBFS[] = new ArrayList[Vbfs];
+//        createGraph(graphBFS);
+//        bfs(graphBFS); // output :-[ 0 1 3 4 5 6 ]
+
+        /// DFS:-
         /*
                     1 --- 3
                    /      | \
@@ -137,10 +166,11 @@ public class Graphs_Fund {
                    \      | /
                     2 --- 4
         */
-        int Vbfs = 7 ;
-        ArrayList<Edge> graphBFS[] = new ArrayList[Vbfs];
-        createGraph(graphBFS);
-        bfs(graphBFS); // output :-[ 0 1 3 4 5 6 ]
+        int Vdfs = 7 ;
+        ArrayList<Edge> graphDFS[] = new ArrayList[Vdfs];
+        createGraph(graphDFS);
+        dfs(graphDFS , 0 , new boolean[Vdfs]); // output [0 1 3 4 2 5 6]
+
     }
 //-----------------------------------------------------------------------------------------------------------------------------
 }
