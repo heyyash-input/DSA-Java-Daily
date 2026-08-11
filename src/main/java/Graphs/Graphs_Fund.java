@@ -55,6 +55,7 @@ public class Graphs_Fund {
         graph[6].add(new Edge(6, 5, 1));
     }
 //-----------------------------------------------------------------------------------------------------------------------------
+
     /// BFS :-
     public static void bfs(ArrayList<Edge>[] graph  ){
         //O(n)
@@ -94,7 +95,28 @@ public class Graphs_Fund {
             }
         }
     }
+//-----------------------------------------------------------------------------------------------------------------------------
 
+    /// HasPath:-
+    public static boolean hasPath(ArrayList<Edge> [] graph , int src , int dest , boolean vis []){
+
+        //case 1:-
+        if(src == dest ) return true ;
+
+        //in starting only mark them as visited:-
+        vis[src] = true;
+
+        //case 2:-
+        for (int i = 0; i < graph[src].size(); i++) {
+            Edge e  = graph[src].get(i);
+            // e.dist = neighbour
+            if (!vis[e.des] && hasPath(graph , e.des  ,  dest , vis)){
+                return true;
+            }
+        }
+        //case 3:-
+        return false ;
+    }
 //-----------------------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
 //        /*
@@ -171,6 +193,11 @@ public class Graphs_Fund {
         createGraph(graphDFS);
         dfs(graphDFS , 0 , new boolean[Vdfs]); // output [0 1 3 4 2 5 6]
 
+        /// Has Path:-
+        int Vpath = 7 ;
+        ArrayList<Edge> graphPath[] = new ArrayList[Vpath];
+        createGraph(graphPath);
+        System.out.println(hasPath(graphPath , 0 , 0  , new boolean[Vpath]));
     }
 //-----------------------------------------------------------------------------------------------------------------------------
 }
