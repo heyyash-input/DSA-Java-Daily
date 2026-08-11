@@ -93,6 +93,7 @@ public class Questions {
 
     }
 //---------------------------------------------------------------------------------------------------------------
+    
     public static int height(Node root){
         if(root == null) return 0 ;
 
@@ -115,7 +116,8 @@ public class Questions {
 
         int left = sumNodes(root.left);
         int right = sumNodes(root.right);
-        return left + right + root.data ;
+        return left + right + root.data;
+
     }
 //---------------------------------------------------------------------------------------------------------------
 
@@ -146,7 +148,6 @@ public class Questions {
 //------------------------------------------------------------------------------------------------------------
 
     ///Subtree (same structure and same Node):-
-
         public static boolean isIdentical(Node root , Node subRoot){
             if(root == null && subRoot == null){
                 return true ;
@@ -226,13 +227,13 @@ public class Questions {
                 }
             }
         }
-
         // top view print:-
         for (int i = min; i <= max; i++) {
             System.out.print(map.get(i) + " ");
         }
         System.out.println();
     }
+
 //-------------------------------------------------------------------------------------------------------------
 
     ///Kth Level of tree:-
@@ -248,6 +249,7 @@ public class Questions {
         kthLevel(root.left , level + 1 , k );
         kthLevel(root.right , level + 1 , k );
     }
+
 //-------------------------------------------------------------------------------------------------------------
 
     /// Lowest Common Ancestor:-
@@ -293,6 +295,7 @@ public class Questions {
         Node lca = p1.get(i - 1);
         return lca;
     }
+
 //-------------------------------------------------------------------------------------------------------------
 
     //LCA mehode:-2
@@ -320,6 +323,7 @@ public class Questions {
 
         return root ;
     }
+
 //--------------------------------------------------------------------------------------------------------------
 
     /// Minimun Distance in tree:-
@@ -353,6 +357,7 @@ public class Questions {
         return dist1 + dist2 ;
 
     }
+
 //-------------------------------------------------------------------------------------------------------------
 
     /// Kth ancestor of node:-
@@ -378,7 +383,8 @@ public class Questions {
         }
         return max + 1 ;
     }
-//---------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------------------------
 
     /// SumTree:-
     public static int transform(Node root){
@@ -409,8 +415,6 @@ public class Questions {
         preorder(root.left);
         preorder(root.right);
     }
+//--------------------------------------------------------------------------------------------------------------------------
 
-//---------------------------------------------------------------------------------------------------------------
-
-//    public
 }

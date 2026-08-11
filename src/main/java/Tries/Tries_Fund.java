@@ -57,30 +57,51 @@ public class Tries_Fund {
     }
 //--------------------------------------------------------------------------------------------------------------------------
 
-
+    /// Start with problem: O (L) = length
+    public static boolean startWith(String prefix ){
+        Node curr = root ;
+        for (int level = 0; level < prefix.length(); level++) {
+            int idx = prefix.charAt(level) - 'a';
+            if(curr.children[idx] == null){
+                return false;
+            }
+            curr = curr.children[idx];
+        }
+        return true;
+    }
 
 //------------------------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
 
         String word[] = {"the" , "a" , "there" , "their" , "any" , "thee"};
         String arr[] ={"i" , "like" , "sam" , "samsung" , "mobile" , "ice"};
+        String word1[] = {"apple" , "app" , "mango" , "man" , "women"};
+        String prefix1 = "app" ;
+        String prefix2 = "moon" ;
 
-        /// insert:-
-        for (int i = 0; i < word.length; i++) {
-            insert(word[i]);
+
+//        /// insert:-
+//        for (int i = 0; i < word.length; i++) {
+//            insert(word[i]);
+//        }
+//
+//        /// search:-
+//        System.out.println( search("the"));
+//        System.out.println(search("ther"));
+//
+//        ///Word breaker:
+//        for (int i = 0; i < arr.length ; i++) {
+//            insert(arr[i]);
+//        }
+//        String key = "ilikemobile";
+//        System.out.println(wordBreaker(key));
+
+        /// Start with problem:
+        for (int i = 0; i < word1.length; i++) {
+            insert(word1[i]);
         }
-
-        /// search:-
-        System.out.println( search("the"));
-        System.out.println(search("ther"));
-
-        ///Word breaker:
-        for (int i = 0; i < arr.length ; i++) {
-            insert(arr[i]);
-        }
-        String key = "ilikemobile";
-        System.out.println(wordBreaker(key));
-
+        System.out.println(startWith(prefix1)); //true
+        System.out.println(startWith(prefix2)); //false
     }
 //------------------------------------------------------------------------------------------------------------------------------
 }
