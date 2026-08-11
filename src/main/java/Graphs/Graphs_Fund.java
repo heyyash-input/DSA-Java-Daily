@@ -1,9 +1,11 @@
 package Graphs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Graphs_Fund {
-
+//-----------------------------------------------------------------------------------------------------------------------------
     static class Edge{
         int src ;
         int des ;
@@ -15,55 +17,130 @@ public class Graphs_Fund {
             this.wt = wt ;
         }
     }
+//-----------------------------------------------------------------------------------------------------------------------------
+    static void createGraph(ArrayList<Edge> graph[]){
 
-    public static void main(String[] args) {
-        /*
-                        (5)
-                    0 ------ 1
-                           /  \
-                     (1)  /    \  (3)
-                         /      \
-                        2 ------ 3
-                        |   (1)
-                    (2) |
-                        |
-                        4
-       */
-
-        int V = 5 ;
-        //same as:- int arr [] = new arr[V];
-        ArrayList<Edge> [] graph = new ArrayList[V]; // null-> empty arraylist
-
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
         }
 
-        //0 - vertex
-        graph[0].add(new Edge(0,1,5));
+        // Vertex 0
+        graph[0].add(new Edge(0, 1, 1));
+        graph[0].add(new Edge(0, 2, 1));
 
-        //1 - vertex
-        graph[1].add(new Edge(1,0,5));
-        graph[1].add(new Edge(1,2,1));
-        graph[1].add(new Edge(1,3,3));
+        // Vertex 1
+        graph[1].add(new Edge(1, 0, 1));
+        graph[1].add(new Edge(1, 3, 1));
 
-        //2 - vertex
-        graph[2].add(new Edge(2,1,1));
-        graph[2].add(new Edge(2,3,1));
-        graph[2].add(new Edge(2,4,2));
+        // Vertex 2
+        graph[2].add(new Edge(2, 0, 1));
+        graph[2].add(new Edge(2, 4, 1));
 
-        //3 - vertex
-        graph[3].add(new Edge(3,1,3));
-        graph[3].add(new Edge(3,2,1));
+        // Vertex 3
+        graph[3].add(new Edge(3, 1, 1));
+        graph[3].add(new Edge(3, 4, 1));
+        graph[3].add(new Edge(3, 5, 1));
 
-        //4 - vertex
-        graph[4].add(new Edge(4,2,2));
+        // Vertex 4
+        graph[4].add(new Edge(4, 2, 1));
+        graph[4].add(new Edge(4, 3, 1));
+        graph[4].add(new Edge(4, 5, 1));
 
-        //2's neighbors:-
-        for (int i = 0; i < graph[2].size(); i++) {
-            Edge e = graph[2].get(i);
-            System.out.println(e.des);
-        }
+        // Vertex 5
+        graph[5].add(new Edge(5, 3, 1));
+        graph[5].add(new Edge(5, 4, 1));
+        graph[5].add(new Edge(5, 6, 1));
 
-
+        // Vertex 6
+        graph[6].add(new Edge(6, 5, 1));
     }
+//-----------------------------------------------------------------------------------------------------------------------------
+    /// BFS :-
+    public static void bfs(ArrayList<Edge>[] graph  ){
+        //O(n)
+        // O(V + E ) but for matrix O(V^2)
+        Queue<Integer> q =new LinkedList<>();
+        boolean vis[] = new boolean[graph.length];
+        q.add(0); // source = 0
+        //till queue is not empty:-
+        while(!q.isEmpty()){
+            // curr is removed one:-
+            int curr = q.remove();
+            if(!vis[curr]){//visit curr
+                //print
+                System.out.println(curr+" ");
+                // if not then true
+                vis[curr] = true;
+                //then print whole
+                for (int i = 0; i < graph[curr].size(); i++) {
+                    Edge e = graph[curr].get(i);
+                    q.add(e.des);
+                }
+            }
+        }
+    }
+//-----------------------------------------------------------------------------------------------------------------------------
+    public static void main(String[] args) {
+//        /*
+//                        (5)
+//                    0 ------ 1
+//                           /  \
+//                     (1)  /    \  (3)
+//                         /      \
+//                        2 ------ 3
+//                        |   (1)
+//                    (2) |
+//                        |
+//                        4
+//       */
+//
+//        int V = 5 ;
+//        //same as:- int arr [] = new arr[V];
+//        ArrayList<Edge> [] graph = new ArrayList[V]; // null-> empty arraylist
+//
+//        for (int i = 0; i < V; i++) {
+//            graph[i] = new ArrayList<>();
+//        }
+//
+//        //0 - vertex
+//        graph[0].add(new Edge(0,1,5));
+//
+//        //1 - vertex
+//        graph[1].add(new Edge(1,0,5));
+//        graph[1].add(new Edge(1,2,1));
+//        graph[1].add(new Edge(1,3,3));
+//
+//        //2 - vertex
+//        graph[2].add(new Edge(2,1,1));
+//        graph[2].add(new Edge(2,3,1));
+//        graph[2].add(new Edge(2,4,2));
+//
+//        //3 - vertex
+//        graph[3].add(new Edge(3,1,3));
+//        graph[3].add(new Edge(3,2,1));
+//
+//        //4 - vertex
+//        graph[4].add(new Edge(4,2,2));
+//
+//        /// Graph creation:-
+//        //2's neighbors:-
+//        for (int i = 0; i < graph[2].size(); i++) {
+//            Edge e = graph[2].get(i);
+//            System.out.println(e.des);
+//        }
+
+        /// BFS:-
+        /*
+                    1 --- 3
+                   /      | \
+                  0       |  5 -- 6
+                   \      | /
+                    2 --- 4
+        */
+        int Vbfs = 7 ;
+        ArrayList<Edge> graphBFS[] = new ArrayList[Vbfs];
+        createGraph(graphBFS);
+        bfs(graphBFS); // output :-[ 0 1 3 4 5 6 ]
+    }
+//-----------------------------------------------------------------------------------------------------------------------------
 }
