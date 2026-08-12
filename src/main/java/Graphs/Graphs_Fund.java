@@ -97,11 +97,11 @@ public class Graphs_Fund {
     }
 //-----------------------------------------------------------------------------------------------------------------------------
 
-    /// HasPath:-
+    /// HasPath:- O(V + E)
     public static boolean hasPath(ArrayList<Edge> [] graph , int src , int dest , boolean vis []){
 
         //case 1:-
-        if(src == dest ) return true ;
+        if(src == dest ) return true;
 
         //in starting only mark them as visited:-
         vis[src] = true;
@@ -114,6 +114,7 @@ public class Graphs_Fund {
                 return true;
             }
         }
+
         //case 3:-
         return false ;
     }
@@ -197,7 +198,7 @@ public class Graphs_Fund {
         int Vpath = 7 ;
         ArrayList<Edge> graphPath[] = new ArrayList[Vpath];
         createGraph(graphPath);
-        System.out.println(hasPath(graphPath , 0 , 0  , new boolean[Vpath]));
+        System.out.println(hasPath(graphPath , 0 , 8  , new boolean[Vpath]));
     }
 //-----------------------------------------------------------------------------------------------------------------------------
 }
