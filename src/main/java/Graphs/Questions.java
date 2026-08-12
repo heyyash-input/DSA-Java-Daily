@@ -228,9 +228,9 @@ public class Questions {
         vis[curr] = true;
 
          for (int i =0 ; i < graph[curr].size() ; i ++){
-             Edge e = graph[curr].get(i);
-             if(!vis[e.des]){
-                topoSortUtil(graph , e.des , vis , s );
+             Edge side = graph[curr].get(i);
+             if(!vis[side.des]){
+                topoSortUtil(graph , side.des , vis , s );
              }
          }
         s.push(curr);
