@@ -1,4 +1,6 @@
 package Graphs;
+import java.lang.reflect.Array;
+import java.security.interfaces.EdECKey;
 import java.util.*;
 public class Questions {
 //------------------------------------------------------------------------------------------------------------------------------
@@ -56,6 +58,36 @@ public class Questions {
         graph[4].add(new Edge(4, 2));
         graph[4].add(new Edge(4, 3));
     }
+//----------------------------------------------------------------------------------------------------------------------------
+
+    ///Topological Sorting Graph creation:-
+    static void createGraphTopo(ArrayList<Edge> graph[]) {
+        for (int i = 0; i < graph.length; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        graph[2].add(new Edge(2, 3));
+
+        graph[3].add(new Edge(3, 1));
+
+        graph[4].add(new Edge(4, 0));
+        graph[4].add(new Edge(4, 1));
+
+        graph[5].add(new Edge(5, 0));
+        graph[5].add(new Edge(5, 2));
+    }
+
+//-----------------------------------------------------------------------------------------------------------------------------
+    /// Directed Cycle :-
+    static void createGraphDiCycle(ArrayList<Edge> graph[]) { //FALSE - no cycle
+        for(int i=0; i<graph.length; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        graph[0].add(new Edge(0, 2));
+        graph[1].add(new Edge(1, 0));
+        graph[2].add(new Edge(2, 3));
+        graph[3].add(new Edge(3, 0));
+    }
 
 //------------------------------------------------------------------------------------------------------------------------------
 
@@ -97,7 +129,7 @@ public class Questions {
     }
 //------------------------------------------------------------------------------------------------------------------------------
 
-    /// Biparitite graph:- using BFS: O(V+E)
+    /// Biparitite graph:- using D FS: O(V+E)
     public static boolean isBipartite(ArrayList<Edge>[] graph){
 
         //initialise every colour with -1 at the beginnig:
@@ -138,7 +170,71 @@ public class Questions {
         }
         return true ;
     }
+//------------------------------------------------------------------------------------------------------------------------------
 
+    /// Directed Cycle using DFS:-
+    public static boolean dirCycle(ArrayList<Edge> [] graph ){
+        boolean vis [] = new boolean[graph.length];
+        boolean stack [] = new boolean [graph.length];
+
+        for (int i = 0; i < graph.length; i++) {
+            if(!vis[i] ){
+                if(dirCycleUtil(graph , i , vis , stack)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean dirCycleUtil(ArrayList<Edge> [] graph , int curr , boolean vis[] , boolean stack []){
+        // marke every one true once visited:
+        vis[curr] = true ;
+        stack[curr] = true ;
+
+        for (int i = 0; i < graph[curr].size(); i++) {
+            Edge e = graph[curr].get(i);
+
+            if(stack[e.des]){ // cycle
+                return true;
+            }
+            // if unvisited
+            else if (!vis[e.des] && dirCycleUtil(graph , curr , vis , stack)) {
+                return true;
+            }
+        }
+        // false because when we are going backward it should return false which was true:
+        stack[curr] = false ;
+        return false;
+    }
+//-----------------------------------------------------------------------------------------------------------------------------
+
+    /// Topological Sorting:-
+    public static void topoSort(ArrayList<Edge> [] graph ){
+        boolean vis [] = new boolean[graph.length];
+        Stack<Integer> s = new Stack<>();
+
+        for (int i = 0; i < graph.length; i++) {
+            if(!vis[i]){
+                topoSortUtil(graph , i , vis , s );
+            }
+        }
+        while(!s.isEmpty()){
+            System.out.print(s.pop()+" ");
+        }
+    }
+
+    public static void topoSortUtil (ArrayList<Edge> graph[] , int curr , boolean vis [] , Stack<Integer> s){
+        vis[curr] = true;
+
+         for (int i =0 ; i < graph[curr].size() ; i ++){
+             Edge e = graph[curr].get(i);
+             if(!vis[e.des]){
+                topoSortUtil(graph , e.des , vis , s );
+             }
+         }
+        s.push(curr);
+    }
 //------------------------------------------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -158,6 +254,7 @@ public class Questions {
         System.out.println(detectCycle(graph)); //output true for cycle and false for no detected cycle;
 
         /// Biparitite Graph:-
+        /// If graph don't have nay cycle it is bipartite graph:
          /*
                 0 ------- 2
                /         /
@@ -168,11 +265,22 @@ public class Questions {
                   3
                 FALSE
         */
-
         int Vbi = 5;
         ArrayList<Edge> graphbi[] = new ArrayList[Vbi];
         createGraphbi(graphbi);
-        System.out.println(isBipartite(graphbi));
+        System.out.println(isBipartite(graphbi)); //
+
+        ///Directed Cycle DFS:-
+        int Vdi = 4;
+        ArrayList<Edge> graphdi[] = new ArrayList[Vdi];
+        createGraphDiCycle(graphdi);
+        System.out.println(dirCycle(graphdi)); // true
+
+        /// Topological Sorting:-
+        int Vtop = 6;
+        ArrayList<Edge> graphtop[] = new ArrayList[Vtop];
+        createGraphTopo(graphtop);
+        topoSort(graphtop);
 
     }
 //------------------------------------------------------------------------------------------------------------------------------
