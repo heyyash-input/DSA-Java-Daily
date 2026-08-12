@@ -6,7 +6,7 @@ public class Questions {
         int src ;
         int des;
 
-        public Edge(int src , int des){
+        public Edge(int src , int dest){
             this.src = src;
             this.des = des;
         }
@@ -32,7 +32,34 @@ public class Questions {
 
         graph[4].add(new Edge(4, 3));
     }
+
+//-----------------------------------------------------------------------------------------------------------------------------
+
+     /// Graph for Biparitite:-
+    static void createGraphbi(ArrayList<Edge> graph[]) {
+        for (int i = 0; i < graph.length; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        graph[0].add(new Edge(0, 1));
+        graph[0].add(new Edge(0, 2));
+
+        graph[1].add(new Edge(1, 0));
+        graph[1].add(new Edge(1, 3));
+
+        graph[2].add(new Edge(2, 0));
+        graph[2].add(new Edge(2, 4));
+
+        graph[3].add(new Edge(3, 1));
+        graph[3].add(new Edge(3, 4));
+
+        graph[4].add(new Edge(4, 2));
+        graph[4].add(new Edge(4, 3));
+    }
+
 //------------------------------------------------------------------------------------------------------------------------------
+
+    /// Cycle detection:- O(V + E):
     public static boolean detectCycle(ArrayList<Edge>[] graph ){
         boolean vis [] = new boolean[graph.length];
         for (int i = 0; i < graph.length; i++) {
@@ -45,7 +72,7 @@ public class Questions {
         }
         return false;
     }
-//------------------------------------------------------------------------------------------------------------------------------
+
     public static boolean detectCycleUtil(ArrayList<Edge>[] graph, boolean vis[] , int curr , int par  ){
         vis[curr] = true;
 
@@ -58,13 +85,58 @@ public class Questions {
                     return true;
                 }
             }
+
             //case 1 :-
             else if (vis[e.des] && e.des != par) {
                 return true;
             }
+
             //case 2 -> do nothing -> conitnue
         }
         return false;
+    }
+//------------------------------------------------------------------------------------------------------------------------------
+
+    /// Biparitite graph:- using BFS: O(V+E)
+    public static boolean isBipartite(ArrayList<Edge>[] graph){
+
+        //initialise every colour with -1 at the beginnig:
+        int col[] = new int [graph.length];
+
+        for (int i = 0; i < graph.length; i++) {
+            col[i] = -1 ;
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < graph.length; i++) {
+            if(col[i] == -1){
+                // BFS when colour is not assign
+                q.add(i);
+                col[i] = 0 ; //yellow
+                while(!q.isEmpty()){
+                    int curr = q.remove();
+                    for (int j = 0; j < graph.length; j++) {
+                        Edge e = graph[curr].get(j); // neighbour - e.des:
+
+                        if(col[e.des] == -1){
+                            //if next col is 0 then make it 1 :
+                            int nextCol  = col[curr] == 0 ? 1 : 0 ;
+                            //then change colour , there should be only opposite colour:
+                            col[e.des] = nextCol;
+                            //and then add next node to queue:
+                            q.add(e.des);
+                        }
+                        //case 2: we got same colour as a neighbours:
+                        else if (col[e.des] == col[curr]) {
+                            return false;
+                        }
+                        // case 3: do nothing just continue
+                    }
+                }
+            }
+        }
+        return true ;
     }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -85,6 +157,22 @@ public class Questions {
         createGraph(graph);
         System.out.println(detectCycle(graph)); //output true for cycle and false for no detected cycle;
 
+        /// Biparitite Graph:-
+         /*
+                0 ------- 2
+               /         /
+              /         /
+             1         4
+              \       /
+               \     /
+                  3
+                FALSE
+        */
+
+        int Vbi = 5;
+        ArrayList<Edge> graphbi[] = new ArrayList[Vbi];
+        createGraphbi(graphbi);
+        System.out.println(isBipartite(graphbi));
 
     }
 //------------------------------------------------------------------------------------------------------------------------------
