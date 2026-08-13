@@ -3,6 +3,7 @@ import java.lang.reflect.Array;
 import java.security.interfaces.EdECKey;
 import java.util.*;
 public class Questions {
+
 //------------------------------------------------------------------------------------------------------------------------------
     static class Edge{
         int src ;
@@ -14,6 +15,7 @@ public class Questions {
         }
     }
 //------------------------------------------------------------------------------------------------------------------------------
+
     static void createGraph(ArrayList<Edge> graph[]) {
         for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
@@ -37,6 +39,24 @@ public class Questions {
 
 //-----------------------------------------------------------------------------------------------------------------------------
 
+    static void createGraphTopBfs(ArrayList<Edge> graph[]) {
+        for(int i=0; i<graph.length; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        graph[2].add(new Edge(2, 3));
+
+        graph[3].add(new Edge(3, 1));
+
+        graph[4].add(new Edge(4, 0));
+        graph[4].add(new Edge(4, 1));
+
+        graph[5].add(new Edge(5, 0));
+        graph[5].add(new Edge(5, 2));
+    }
+
+//--------------------------------------------------------------------------------------------------------------------------
+
      /// Graph for Biparitite:-
     static void createGraphbi(ArrayList<Edge> graph[]) {
         for (int i = 0; i < graph.length; i++) {
@@ -58,6 +78,7 @@ public class Questions {
         graph[4].add(new Edge(4, 2));
         graph[4].add(new Edge(4, 3));
     }
+
 //----------------------------------------------------------------------------------------------------------------------------
 
     ///Topological Sorting Graph creation:-
@@ -78,6 +99,7 @@ public class Questions {
     }
 
 //-----------------------------------------------------------------------------------------------------------------------------
+
     /// Directed Cycle :-
     static void createGraphDiCycle(ArrayList<Edge> graph[]) { //FALSE - no cycle
         for(int i=0; i<graph.length; i++) {
@@ -127,6 +149,7 @@ public class Questions {
         }
         return false;
     }
+
 //------------------------------------------------------------------------------------------------------------------------------
 
     /// Biparitite graph:- using D FS: O(V+E)
@@ -170,6 +193,7 @@ public class Questions {
         }
         return true ;
     }
+
 //------------------------------------------------------------------------------------------------------------------------------
 
     /// Directed Cycle using DFS:-
@@ -198,6 +222,7 @@ public class Questions {
             if(stack[e.des]){ // cycle
                 return true;
             }
+
             // if unvisited
             else if (!vis[e.des] && dirCycleUtil(graph , curr , vis , stack)) {
                 return true;
@@ -215,26 +240,75 @@ public class Questions {
         Stack<Integer> s = new Stack<>();
 
         for (int i = 0; i < graph.length; i++) {
+            // if not visited:
             if(!vis[i]){
                 topoSortUtil(graph , i , vis , s );
             }
         }
+        //print till empty
         while(!s.isEmpty()){
             System.out.print(s.pop()+" ");
         }
     }
 
     public static void topoSortUtil (ArrayList<Edge> graph[] , int curr , boolean vis [] , Stack<Integer> s){
+        // mark every visited node true:
         vis[curr] = true;
-
+        // loop for neighbour's :
          for (int i =0 ; i < graph[curr].size() ; i ++){
-             Edge side = graph[curr].get(i);
-             if(!vis[side.des]){
-                topoSortUtil(graph , side.des , vis , s );
+             Edge e = graph[curr].get(i);
+             // then just perform simple call stack for Util
+             if(!vis[e.des]){
+                topoSortUtil(graph , e.des , vis , s );
              }
          }
         s.push(curr);
     }
+//------------------------------------------------------------------------------------------------------------------------------
+
+    /// Topological Sort using BFS:-
+    // Calculate In-Degree of each vertex
+    public static void calIndeg(ArrayList<Edge>[] graph, int indeg[]) {
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[i].size(); j++) {
+                Edge e = graph[i].get(j);
+                indeg[e.des]++;
+            }
+        }
+    }
+
+    /// Topological Sort using BFS (Kahn's Algorithm):-
+    public static void topoSortBfs(ArrayList<Edge>[] graph) {
+        int[] indeg = new int[graph.length];
+
+        // 1. Calculate in-degrees first!
+        calIndeg(graph, indeg);
+
+        Queue<Integer> q = new LinkedList<>();
+
+        // 2. Add all 0 in-degree nodes to Queue
+        for (int i = 0; i < indeg.length; i++) {
+            if (indeg[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        // 3. BFS Traversal
+        while (!q.isEmpty()) {
+            int curr = q.remove();
+            System.out.print(curr + " ");
+
+            for (int i = 0; i < graph[curr].size(); i++) {
+                Edge e = graph[curr].get(i);
+                indeg[e.des]--;
+                if (indeg[e.des] == 0) {
+                    q.add(e.des);
+                }
+            }
+        }
+        System.out.println();
+    }
+
 //------------------------------------------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -247,6 +321,7 @@ public class Questions {
                \ |
                  2
         */
+
         /// Cycle detection:-
         int V = 5 ;
         ArrayList<Edge> graph[] = new ArrayList[V];
@@ -276,11 +351,17 @@ public class Questions {
         createGraphDiCycle(graphdi);
         System.out.println(dirCycle(graphdi)); // true
 
-        /// Topological Sorting:-
+        /// Topological Sorting using DFS:-
         int Vtop = 6;
         ArrayList<Edge> graphtop[] = new ArrayList[Vtop];
         createGraphTopo(graphtop);
         topoSort(graphtop);
+
+        ///Topological Sorting using BFS :
+        int Vtopbfs = 6;
+        ArrayList<Edge> graphtopbfs[] = new ArrayList[Vtopbfs];
+        createGraphTopBfs(graphtopbfs);
+        topoSortBfs(graphtopbfs);
 
     }
 //------------------------------------------------------------------------------------------------------------------------------

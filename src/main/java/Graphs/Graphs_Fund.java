@@ -95,6 +95,7 @@ public class Graphs_Fund {
             }
         }
     }
+
 //-----------------------------------------------------------------------------------------------------------------------------
 
     /// HasPath:- O(V + E)
@@ -189,6 +190,7 @@ public class Graphs_Fund {
                    \      | /
                     2 --- 4
         */
+        /// DFS:-
         int Vdfs = 7 ;
         ArrayList<Edge> graphDFS[] = new ArrayList[Vdfs];
         createGraph(graphDFS);
@@ -199,6 +201,8 @@ public class Graphs_Fund {
         ArrayList<Edge> graphPath[] = new ArrayList[Vpath];
         createGraph(graphPath);
         System.out.println(hasPath(graphPath , 0 , 8  , new boolean[Vpath]));
+
+        ///
     }
 //-----------------------------------------------------------------------------------------------------------------------------
 }
