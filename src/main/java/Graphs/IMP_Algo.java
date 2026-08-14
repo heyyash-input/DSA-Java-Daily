@@ -209,28 +209,107 @@ public class IMP_Algo {
         }
         System.out.println();
     }
+//---------------------------------------------------------------------------------------------------------------------------
 
+    /// Cheapest Flight within k:
+    // Create Graph for Flights
+    public static void createGraphFlight(int flights[][], ArrayList<Edge>[] graph) {
+        for (int i = 0; i < graph.length; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < flights.length; i++) {
+            int sc = flights[i][0];
+            int des = flights[i][1];
+            int wt = flights[i][2];
+
+            Edge e = new Edge(sc, des, wt);
+            graph[sc].add(e);
+        }
+    }
+
+    static class Info {
+        int v;
+        int cost;
+        int stops;
+
+        public Info(int v, int cost, int stops) {
+            this.v = v;
+            this.cost = cost;
+            this.stops = stops;
+        }
+    }
+
+    public static int cheapestFlight(int n, int flights[][], int src, int dest, int k) {
+        ArrayList<Edge> graphflight[] = new ArrayList[n];
+        createGraphFlight(flights, graphflight);
+
+        int dist[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i != src) {
+                dist[i] = Integer.MAX_VALUE;
+            }
+        }
+
+        Queue<Info> q = new LinkedList<>();
+        q.add(new Info(src, 0, 0));
+
+        while (!q.isEmpty()) {
+            Info curr = q.remove();
+
+            // Use continue (NOT break), so other valid paths in queue are processed
+            if (curr.stops > k) {
+                continue;
+            }
+
+            for (int i = 0; i < graphflight[curr.v].size(); i++) {
+                Edge e = graphflight[curr.v].get(i);
+                int v = e.dest;
+                int wt = e.wt;
+
+                // Compare with curr.cost instead of dist[u]
+                if (curr.cost + wt < dist[v] && curr.stops <= k) {
+                    dist[v] = curr.cost + wt;
+                    q.add(new Info(v, dist[v], curr.stops + 1));
+                }
+            }
+        }
+
+        if(dist[dest] == Integer.MAX_VALUE){
+            return -1;
+        }else{
+            return dist[dest];
+        }
+
+    }
 //---------------------------------------------------------------------------------------------------------------------------
     public static void main(String args[]) {
 
         /// Dijkstra Algo:-
-        int V = 6;
-        ArrayList<Edge> graph[] = new ArrayList[V];
-        createGraph(graph);
-        int src = 0;
-        dijkstra(graph, src);//0 2 3 8 6 9
+//        int V = 6;
+//        ArrayList<Edge> graph[] = new ArrayList[V];
+//        createGraph(graph);
+//        int src = 0;
+//        dijkstra(graph, src);//0 2 3 8 6 9
+//
+//        /// Bellman Ford:-
+//        int Vbell = 6;
+//        ArrayList<Edge> graphbell[] = new ArrayList[Vbell];
+//        createGraphBell(graphbell);
+//        BellmanFord(graphbell , 0);//0 2 -2 0 4
+//
+//        /// Prims Algo:-
+//        int Vprim = 4 ;
+//        ArrayList<Edge> graphprim[] = new ArrayList[Vprim];
+//        createGraphPrim(graphprim);
+//        primAlgo(graphprim); //55
 
-        /// Bellman Ford:-
-        int Vbell = 6;
-        ArrayList<Edge> graphbell[] = new ArrayList[Vbell];
-        createGraphBell(graphbell);
-        BellmanFord(graphbell , 0);//0 2 -2 0 4
-
-        /// Prims Algo:-
-        int Vprim = 4 ;
-        ArrayList<Edge> graphprim[] = new ArrayList[Vprim];
-        createGraphPrim(graphprim);
-        primAlgo(graphprim); //55
+        /// Cheapest Flight within K:
+        int n = 4;
+        int flights[][] = {{0, 1, 100}, {1, 2, 200}, {2, 0, 100}, {1, 3, 600}, {2, 3, 200}};
+        int src = 0, dst = 3, k = 1;
+        int ans = cheapestFlight(n, flights, src, dst, k);
+        System.out.println("Cheapest Flight Cost: " + ans);
     }
 //---------------------------------------------------------------------------------------------------------------------------
 }
