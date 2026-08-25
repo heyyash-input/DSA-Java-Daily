@@ -106,7 +106,7 @@ public class Arrays1_n {
     public static void Rotate(int[] arr,int k){
         int n=arr.length;
          k = k%n ;
-        Reverse(arr,0,n-1);
+         Reverse(arr,0,n-1);
        Reverse(arr,0,k-1);
        Reverse(arr,k,n-1);
 
@@ -136,7 +136,7 @@ public class Arrays1_n {
         return maxLength;
     }
 
-//    -----------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
 // For negative and positve integers we can't use sliding window we need prefix + hashing
     public static int LogenstSubarraySumK(int []arr , int k){
         HashMap<Integer,Integer> map = new HashMap<>();
@@ -181,6 +181,7 @@ public class Arrays1_n {
         nums[start] = nums[end];
         nums[end] = temp ;
     }
+//----------------------------------------------------------------------------------------------------------------------------
 //     kadane's algorithm VVIMP:-w  
     public static int MaximumSubarray(int [] arr){
         int maxSum = 0 ;
@@ -206,6 +207,7 @@ public class Arrays1_n {
             end --;
         }
     }
+//-----------------------------------------------------------------------------------------------------------------------------
     public static void NextPermutation(int[] nums){
 
         if (nums == null || nums.length == 0) ;
@@ -229,5 +231,5 @@ public class Arrays1_n {
         }
         reverse(nums , index+1 , n-1);
     }
-    
+//--------------------------------------------------------------------------------------------------------------------------
 }

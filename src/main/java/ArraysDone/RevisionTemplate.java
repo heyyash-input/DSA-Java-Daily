@@ -80,7 +80,7 @@ public class RevisionTemplate {
 
         int n = prices.length;
         int buyPrice = Integer.MAX_VALUE;
-        int maxProfit = Integer.MIN_VALUE; // or keep '0' as per the Test Cases ;
+        int maxProfit = Integer.MIN_VALUE; // or keep '0' as per the Test Cases;
 
         for (int i = 0; i < n ; i++) {
             if(buyPrice < prices[i]){
