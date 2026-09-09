@@ -6,8 +6,9 @@ public class MergeSort {
         /// merge sort:-
         int num [] = {6 ,3 ,9 , 5 ,2 ,8 };
         mergeSort(num , 0 , num.length-1);
+
         for (int i = 0; i < num.length; i++) {
-            System.out.print(num[i]);
+            System.out.print(" "+ num[i]);
         }
         System.out.println();
     }
@@ -28,8 +29,10 @@ public class MergeSort {
     }
 
     public static void merge (int num [] , int s , int mid , int e){
+
         int n = num.length;
         // add all elements in temp first:-
+        // remember this logic about:- [ e - s + 1 ] best size
         int temp [] = new int[ e -s + 1 ];
 
         int i = s ; // iterator for left part ;
@@ -37,8 +40,9 @@ public class MergeSort {
 
         int k = 0 ; // iterator for temp elements:-
 
+        // for taking whole temp case 1:
         while(i <= mid && j <= e ){
-            if(num[i] < num[j]){
+            if(num[i] <= num[j]){
                 temp[k] = num[i];
                 i++ ;
             }else{
@@ -49,6 +53,7 @@ public class MergeSort {
             k++;
         }
 
+        // the elements remaining case :-
         // now that we have copied every element:
         // for left part:-
         while(i <= mid){
@@ -67,7 +72,6 @@ public class MergeSort {
         for ( k = 0 , i = s ; k < temp.length ; k++ , i++) {
             num[i] = temp[k];
         }
-
     }
 
 
