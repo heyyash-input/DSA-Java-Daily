@@ -42,19 +42,13 @@ public class Sorting1_n{
 
     // Partition using last element as pivot
     public static int partition(int[] arr, int s, int e) {
-
         int pivot = arr[e];
-
         // End of smaller-elements region
         int i = s - 1;
-
         // Scan elements before pivot
         for (int j = s; j < e; j++) {
-
             if (arr[j] <= pivot) {
-
                 i++;
-
                 // Move smaller element to left
                 int temp = arr[i];
                 arr[i] = arr[j];
@@ -64,11 +58,9 @@ public class Sorting1_n{
 
         // Put pivot in correct position
         i++;
-
         int temp = arr[i];
         arr[i] = arr[e];
         arr[e] = temp;
-
         return i;
     }
 }
