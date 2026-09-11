@@ -1,4 +1,4 @@
-package Last_Moment_Rev.IMP_patterns;
+package Last_Moment_Rev.IMP_patterns.Strings;
 
 import java.util.Arrays;
 import java.util.HashMap;
