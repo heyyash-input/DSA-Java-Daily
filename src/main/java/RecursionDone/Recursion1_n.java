@@ -191,6 +191,7 @@ public class Recursion1_n {
 //-----------------------------------------------------------------------------------------------------------
 
     public static int powExp (int x , int n ){
+
         if( n==1 ){
             return x ;
         }
@@ -200,9 +201,11 @@ public class Recursion1_n {
 //-----------------------------------------------------------------------------------------------------------
 
     public static int optPow(int a , int n ){
+
         if (n == 0 ){
             return 1 ;
         }
+
         // but still this is O(n) cause we are calling function two times to make
         // O (log n ) store one call in one variable then make it sqaure
         int halfSq = optPow(a,n/2);
@@ -211,6 +214,7 @@ public class Recursion1_n {
         if(n%2 != 0){
             halfPow = a * halfPow ;
         }
+
         return halfPow ;
     }
 
