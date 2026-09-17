@@ -1,5 +1,8 @@
 package DP_basics.Fundamentals.Questions_Patterns;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class Questions {
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -25,6 +28,10 @@ public class Questions {
 
         ///Lonest subsequence with Tabulation:
         System.out.println(lcsTab(str1,str2));
+
+        /// Longest Increasing Subsequence:
+        int num [] = {10 , 9 ,2 ,5 , 3, 7 ,101 , 18};
+        System.out.println(lcsInc(num)); // output :-4
 
     }
 
@@ -74,7 +81,7 @@ public class Questions {
 
 //------------------------------------------------------------------------------------------------------------------------------
 
-    //Lowest Common Subseq By tabulation:
+    ///Lowest Common Subseq By tabulation:
     public static int lcsTab(String str1 , String str2 ){
 
         int n = str1.length();
@@ -104,7 +111,7 @@ public class Questions {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-    //Lowest Common Subseq By tabulation:
+    ///Lowest Common Subseq By tabulation:
     public static int lcSubstring(String str1 , String str2 ){
 
         int n = str1.length();
@@ -129,6 +136,55 @@ public class Questions {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
+
+    /// Longest Common Increasing Subsequence:
+    public static int lcsInc(int [] arr ){
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int i = 0 ; i < arr.length ; i ++ ){
+            set.add(arr[i]);
+        }
+
+        int [] arr2 = new int [set.size()]; // sorted element store
+        int i = 0 ;
+        for( int num : arr){
+            arr2 [i] = num ;
+            i++;
+        }
+
+        Arrays.sort(arr2);
+
+       return lcs(arr , arr2);
+    }
+
+    public static int lcs(int arr [] , int arr2 []){
+
+        int n = arr.length ;
+        int m = arr2.length;
+
+        int dp [][] = new int [n+1][m+1] ;
+
+        for(int i = 0 ; i < n+ 1 ; i++){
+            for (int j = 0; j < m+1; j++) {
+                if( i ==0 || j == 0){
+                    dp[i][j] = 0 ;
+                }
+            }
+        }
+
+        for (int i = 1; i < n+1; i++) {
+            for (int j = 1; j < m+1; j++) {
+                if(arr[i-1] == arr2[j-1]){
+                    dp[i][j] = dp[i-1][j-1] + 1 ;
+                }
+                else{
+                    dp[i][j] =Math.max(dp[i-1][j] , dp[i][j-1]);
+                }
+            }
+        }
+        return dp[n][m];
+    }
 
 
 }
