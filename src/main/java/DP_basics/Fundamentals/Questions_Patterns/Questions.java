@@ -13,7 +13,7 @@ public class Questions {
         String str2 = "abc";
         System.out.println(lowestCommonSubseq(str1 , str2 , str1.length() , str2.length()));
 
-        /// Lonest subsequence with MEMO:
+        /// Longmest subsequence
         int n = str1.length();
         int m = str1.length();
         int dp [][] = new int[n+1][m+1];
@@ -167,7 +167,7 @@ public class Questions {
 
         for(int i = 0 ; i < n+ 1 ; i++){
             for (int j = 0; j < m+1; j++) {
-                if( i ==0 || j == 0){
+                if( i == 0 || j == 0){
                     dp[i][j] = 0 ;
                 }
             }
@@ -185,6 +185,6 @@ public class Questions {
         }
         return dp[n][m];
     }
-
+    
 
 }

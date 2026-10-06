@@ -9,6 +9,7 @@ public class MergeSort {
     }
 
     public static void mergeSort (int arr[] , int si , int ei){
+        // base condition:
         if ( si >= ei){
             return;
         }
@@ -23,7 +24,7 @@ public class MergeSort {
         int i = si ; //iterator for left part
         int j = mid + 1 ; // iterator for right part
         int k = 0 ; // iterator for temp
-        while ( i <= mid && j<=ei){
+        while (i <= mid && j <= ei){
             if (arr[i] < arr[j]){
                 temp[k] = arr[i];
                 i++;
