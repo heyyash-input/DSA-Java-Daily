@@ -79,6 +79,22 @@ public class SlidingWindow1_n {
         return maxSum ;
     }
 
+    public static int maxSubMethode01( int [] arr , int k){
+        int currSum = 0 ;
+        for (int i = 0; i < k ; i++) {
+            currSum += arr[i];
+        }
+
+        int maxSum = currSum ;
+        int ans = 0 ;
+        for (int right = k ; right < arr.length; right++) {
+            maxSum += arr[right]; // can be added
+            maxSum -= arr[right - k ]; // can be removed
+            ans = Math.max( ans , maxSum);
+        }
+        return ans ;
+    }
+
 //--------------------------------------------------------------------------------------------------------------
 
     public static  int MinimumSub(int [] arr , int k){
